@@ -666,8 +666,10 @@ class Component extends DCLogic {
   constructor(props){
     super(props);
     this.scenes = []; this.lang = 'en';
+    this._dirty = true; this._rzt = 0; this._vw = 0; this._vh = 0;
     this.setRoot = (el) => { if (el) this.rootEl = el; };
-    this.onScroll = () => this.update();
+    this.onScroll = () => { this._dirty = true; };
+    this.tick = this.tick.bind(this);
   }
   componentDidMount(){
     var dl = (this.props.defaultLang || 'auto');
@@ -676,11 +678,12 @@ class Component extends DCLogic {
     this.cache();
     this.applyLang();
     this.initCanvas();
+    this._vw = window.innerWidth || 1200; this._vh = window.innerHeight || 800;
     this.update();
-    if (this._loop) clearInterval(this._loop);
-    this._loop = setInterval(this.update.bind(this), 33);
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = requestAnimationFrame(this.tick);
     window.addEventListener('scroll', this.onScroll, { passive: true });
-    this.onResize = () => { this.resizeCanvas(); this.update(); };
+    this.onResize = () => { this.resizeCanvas(); var self = this; if (self._rzt) clearTimeout(self._rzt); self._rzt = setTimeout(function(){ self._rzt = 0; var nw = window.innerWidth || 1200, nh = window.innerHeight || 800; if (nw !== self._vw || Math.abs(nh - self._vh) > 150){ self._vw = nw; self._vh = nh; } self._dirty = true; }, 150); };
     window.addEventListener('resize', this.onResize, { passive: true });
     var self = this;
     this.ioEnter = new IntersectionObserver(function(ents){
@@ -688,9 +691,10 @@ class Component extends DCLogic {
     }, { threshold: 0.16 });
     this.qa('[data-enter]').forEach(function(x){ self.ioEnter.observe(x); });
   }
-  componentDidUpdate(){ this.cache(); this.applyLang(); this.update(); }
+  componentDidUpdate(){ this.cache(); this.applyLang(); if (!this.raf) this.raf = requestAnimationFrame(this.tick); this._dirty = true; this.update(); }
   componentWillUnmount(){
-    if (this._loop) clearInterval(this._loop);
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this._rzt) clearTimeout(this._rzt);
     if (this.craf) cancelAnimationFrame(this.craf);
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onResize);
@@ -711,7 +715,7 @@ class Component extends DCLogic {
     this.chapters = this.qa('[data-chapter]');
   }
   prog(el){
-    var r = el.getBoundingClientRect(); var vh = window.innerHeight || 800;
+    var r = el.getBoundingClientRect(); var vh = this._vh || 800;
     var denom = r.height - vh; var p = denom > 0 ? (-r.top / denom) : (r.top < vh ? 1 : 0);
     return p < 0 ? 0 : p > 1 ? 1 : p;
   }
@@ -725,9 +729,18 @@ class Component extends DCLogic {
     return (ds.prefix || '') + n + (ds.suffix || '');
   }
   update(){
-    var vh = window.innerHeight || 800;
-    for (var i = 0; i < this.scenes.length; i++){
-      var sc = this.scenes[i]; var p = this.prog(sc.el); sc.el.style.setProperty('--p', p.toFixed(4));
+    var vh = this._vh || 800;
+    var n = this.scenes.length, ps = [];
+    for (var i = 0; i < n; i++){ ps[i] = this.prog(this.scenes[i].el); }
+    var chs = this.chapters || [], chn = chs.length, chr = [];
+    for (var m = 0; m < chn; m++){ chr[m] = chs[m].getBoundingClientRect(); }
+    var se = document.scrollingElement || document.documentElement;
+    var mx = (se.scrollHeight - se.clientHeight) || 1;
+    var op = Math.min(1, Math.max(0, se.scrollTop / mx));
+    var en = this.enters, enn = en ? en.length : 0, enr = [];
+    for (var z = 0; z < enn; z++){ enr[z] = en[z]._shown ? null : en[z].getBoundingClientRect(); }
+    for (var i2 = 0; i2 < n; i2++){
+      var sc = this.scenes[i2]; var p = ps[i2]; sc.el.style.setProperty('--p', p.toFixed(4));
       for (var j = 0; j < sc.counts.length; j++){
         var c = sc.counts[j], ds = c.dataset;
         var a = ds.at ? parseFloat(ds.at) : 0, b = ds.end ? parseFloat(ds.end) : 1;
@@ -741,22 +754,16 @@ class Component extends DCLogic {
         d.style.strokeDashoffset = (d._len * (1 - this.sub(p, a2, b2))).toFixed(1);
       }
     }
-    var chs = this.chapters || [], best = null, bestD = 1e9;
-    for (var m = 0; m < chs.length; m++){
-      var r = chs[m].getBoundingClientRect(); var cc = r.top + r.height/2; var dd2 = Math.abs(cc - vh/2);
-      if (r.bottom > 0 && r.top < vh && dd2 < bestD){ bestD = dd2; best = chs[m]; }
-    }
+    var best = null, bestD = 1e9;
+    for (var m2 = 0; m2 < chn; m2++){ var r = chr[m2]; var cc = r.top + r.height/2; var dd2 = Math.abs(cc - vh/2); if (r.bottom > 0 && r.top < vh && dd2 < bestD){ bestD = dd2; best = chs[m2]; } }
     if (best){
       var ac = best.getAttribute('data-accent') || '#2997ff';
       if (ac !== this._ac){ this._ac = ac; this.accentT = this.hexRgb(ac); }
       var id = best.getAttribute('data-chapter');
       if (best !== this._bestEl){ this._bestEl = best; this.setActive(best); }
     }
-    var se = document.scrollingElement || document.documentElement;
-    var mx = (se.scrollHeight - se.clientHeight) || 1;
-    var op = Math.min(1, Math.max(0, se.scrollTop / mx));
     var pb = this.q('[data-prog]'); if (pb) pb.style.width = (op * 100).toFixed(2) + '%';
-    if (this.enters){ for (var z = 0; z < this.enters.length; z++){ var e = this.enters[z]; if (e._shown) continue; var er = e.getBoundingClientRect(); if (er.top < vh * 0.92 && er.bottom > 0){ e.style.opacity = '1'; e.style.transform = 'none'; e._shown = true; } } }
+    if (en){ for (var z2 = 0; z2 < enn; z2++){ var e = en[z2]; if (e._shown) continue; var er = enr[z2]; if (er && er.top < vh * 0.92 && er.bottom > 0){ e.style.opacity = '1'; e.style.transform = 'none'; e._shown = true; } } }
   }
   setActive(el){
     var ar = this.lang === 'ar';
@@ -818,6 +825,7 @@ class Component extends DCLogic {
     };
     this.craf = requestAnimationFrame(draw);
   }
+  tick(){ if (this._dirty){ this._dirty = false; this.update(); } this.raf = requestAnimationFrame(this.tick); }
   renderVals(){ return { rootRef: this.setRoot, toggleLang: () => this.toggleLang() }; }
 }
 </script>
