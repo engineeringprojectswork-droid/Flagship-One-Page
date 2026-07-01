@@ -309,17 +309,17 @@ if(RTL){document.querySelectorAll('[data-ar]').forEach(function(el){el.innerHTML
 
 /* ----- scroll progress driver ----- */
 var rail=document.getElementById('rail'), hint=document.getElementById('hint'), bgacc=document.getElementById('bgacc');
-var P=0, hinted=false;
+var P=0, hinted=false, VW=innerWidth, VH=innerHeight;
 function getP(){
   var t=document.getElementById('track');
-  var max=t.offsetHeight - innerHeight;
+  var max=t.offsetHeight - VH;
   return max>0 ? clamp((window.scrollY||window.pageYOffset)/max,0,1) : 0;
 }
 var ticking=false;
 function onScroll(){ if(!ticking){ticking=true; requestAnimationFrame(function(){P=getP(); render(P); ticking=false;});}
   if(!hinted && (window.scrollY||0)>40){hinted=true; hint.style.opacity=0;} }
 addEventListener('scroll',onScroll,{passive:true});
-addEventListener('resize',function(){P=getP(); render(P);});
+addEventListener('resize',function(){if(innerWidth!==VW){VW=innerWidth; VH=innerHeight;} P=getP(); render(P);});
 window.__starP=0;
 
 /* scene hook (defined below) */
