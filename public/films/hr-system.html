@@ -222,12 +222,12 @@ var ambientCBs=[];
 })();
 
 var rail=document.getElementById('rail'), bgacc=document.getElementById('bgacc'), hint=document.getElementById('hint');
-var P=0, ticking=false, hinted=false;
-function getP(){var t=document.getElementById('track'); var max=t.offsetHeight-innerHeight; return max>0?clamp((scrollY||pageYOffset)/max,0,1):0;}
+var P=0, ticking=false, hinted=false, VW=innerWidth, VH=innerHeight;
+function getP(){var t=document.getElementById('track'); var max=t.offsetHeight-VH; return max>0?clamp((scrollY||pageYOffset)/max,0,1):0;}
 function onScroll(){ if(!ticking){ticking=true; requestAnimationFrame(function(){P=getP(); render(P); ticking=false;});}
   if(!hinted&&(scrollY||0)>40){hinted=true; if(hint)hint.style.opacity=0;} }
 addEventListener('scroll',onScroll,{passive:true});
-addEventListener('resize',function(){P=getP(); render(P);});
+addEventListener('resize',function(){if(innerWidth!==VW){VW=innerWidth; VH=innerHeight;} P=getP(); render(P);});
 function render(p){window.__starP=p; rail.style.width=(p*100).toFixed(2)+'%'; if(bgacc)bgacc.style.opacity=(0.3+0.4*Math.sin(p*Math.PI)).toFixed(3); scene(p);}
 /* ===== hiring scene ===== */
 var Lhero=document.getElementById('L-hero'),Lintake=document.getElementById('L-intake'),

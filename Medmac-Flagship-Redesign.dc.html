@@ -519,9 +519,9 @@ body{margin:0;background:#06060c;color:#f3f4ff;font-family:-apple-system,BlinkMa
     <h2 data-enter data-ar="وظّف شخصًا. احصل على فريق." style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .08s;margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(44px,8vw,124px);line-height:.96;letter-spacing:-.035em">Hire one.<br><span style="background:linear-gradient(100deg,#2997ff,#bf5af2 50%,#ff453a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Get a team.</span></h2>
     <p data-enter data-ar="تسعة أنظمة. شخصٌ واحد. كل رقمٍ حقيقي." style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .16s;margin:32px 0 0;font-size:clamp(16px,1.6vw,20px);line-height:1.6;color:#aab0d6">Nine systems. One person. Every number real.</p>
     <div data-enter style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .24s;margin:42px 0 0;display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
-      <span style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px">WhatsApp <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ add link</span></span>
-      <span style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px">Email <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ add link</span></span>
-      <span style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px">LinkedIn <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ add link</span></span>
+      <a href="https://wa.me/96590022918" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px;text-decoration:none;cursor:pointer">WhatsApp <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ 90022918</span></a>
+      <a href="mailto:medo433447@gmail.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px;text-decoration:none;cursor:pointer">Email <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ medo433447@gmail.com</span></a>
+      <a href="https://www.linkedin.com/in/mohamed-mahmoud-5a748b243" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px;text-decoration:none;cursor:pointer">LinkedIn <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ in/mohamed-mahmoud</span></a>
     </div>
     <p data-enter style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .32s;margin:54px 0 30px;font:500 12.5px/1.6 ui-monospace,Menlo,monospace;color:#6f74a0;letter-spacing:.04em">Mohamed Mahmoud — Medmac · Kuwait · 2026</p>
   </section>
@@ -534,20 +534,23 @@ body{margin:0;background:#06060c;color:#f3f4ff;font-family:-apple-system,BlinkMa
 class Component extends DCLogic {
   constructor(props){
     super(props);
-    this.scenes = []; this.raf = 0;
+    this.scenes = []; this.raf = 0; this._dirty = true; this._rzt = 0; this._vw = 0; this._vh = 0;
     this.setRoot = (el) => { if (el) this.rootEl = el; };
-    this.onScroll = () => this.update();
+    this.onScroll = () => { this._dirty = true; };
+    this.onResize = () => { var self = this; if (self._rzt) clearTimeout(self._rzt); self._rzt = setTimeout(function(){ self._rzt = 0; var nw = window.innerWidth || 1200, nh = window.innerHeight || 800; if (nw !== self._vw || Math.abs(nh - self._vh) > 150){ self._vw = nw; self._vh = nh; self._dirty = true; } }, 150); };
+    this.tick = this.tick.bind(this);
   }
   componentDidMount(){
     this.cache();
     this.applyLang();
+    this._vw = window.innerWidth || 1200;
+    this._vh = window.innerHeight || 800;
     this.update();
-    if (this._loop) clearInterval(this._loop);
-    this._loop = setInterval(this.update.bind(this), 33);
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = requestAnimationFrame(this.tick);
     var self2 = this; setTimeout(function(){ if (self2.enters) self2.enters.forEach(function(e){ e.style.opacity = '1'; e.style.transform = 'none'; e._shown = true; }); }, 1600);
     window.addEventListener('scroll', this.onScroll, { passive: true });
-    window.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
-    window.addEventListener('resize', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize, { passive: true });
     var self = this;
     this.ioNav = new IntersectionObserver(function(ents){
       ents.forEach(function(e){ if (e.isIntersecting) self.setActive(e.target.getAttribute('data-chapter')); });
@@ -559,12 +562,14 @@ class Component extends DCLogic {
     this.qa('[data-enter]').forEach(function(x){ self.ioEnter.observe(x); });
   }
   componentWillUnmount(){
-    if (this._loop) clearInterval(this._loop);
-    window.removeEventListener('resize', this.onScroll);
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this._rzt) clearTimeout(this._rzt);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
     if (this.ioNav) this.ioNav.disconnect();
     if (this.ioEnter) this.ioEnter.disconnect();
   }
-  componentDidUpdate(){ this.cache(); this.applyLang(); if (!this._loop) this._loop = setInterval(this.update.bind(this), 33); this.update(); }
+  componentDidUpdate(){ this.cache(); this.applyLang(); if (!this.raf) this.raf = requestAnimationFrame(this.tick); this._dirty = true; this.update(); }
   q(s){ return (this.rootEl || document).querySelector(s); }
   qa(s){ return Array.prototype.slice.call((this.rootEl || document).querySelectorAll(s)); }
   cache(){
@@ -578,7 +583,7 @@ class Component extends DCLogic {
     this.enters = this.qa('[data-enter]');
   }
   prog(el){
-    var r = el.getBoundingClientRect(); var vh = window.innerHeight || 800;
+    var r = el.getBoundingClientRect(); var vh = this._vh || 800;
     var denom = r.height - vh; var p = denom > 0 ? (-r.top / denom) : (r.top < vh ? 1 : 0);
     return p < 0 ? 0 : p > 1 ? 1 : p;
   }
@@ -592,8 +597,15 @@ class Component extends DCLogic {
     return (ds.prefix || '') + n + (ds.suffix || '');
   }
   update(){
-    for (var i = 0; i < this.scenes.length; i++){
-      var sc = this.scenes[i]; var p = this.prog(sc.el); sc.el.style.setProperty('--p', p.toFixed(4));
+    var vh = this._vh || 800;
+    var n = this.scenes.length, ps = [];
+    for (var i = 0; i < n; i++){ ps[i] = this.prog(this.scenes[i].el); }
+    var chs = this.qa('[data-chapter]'), chn = chs.length, chr = [];
+    for (var m = 0; m < chn; m++){ chr[m] = chs[m].getBoundingClientRect(); }
+    var en = this.enters, enn = en ? en.length : 0, enr = [];
+    for (var z = 0; z < enn; z++){ enr[z] = en[z]._shown ? null : en[z].getBoundingClientRect(); }
+    for (var i2 = 0; i2 < n; i2++){
+      var sc = this.scenes[i2]; var p = ps[i2]; sc.el.style.setProperty('--p', p.toFixed(4));
       for (var j = 0; j < sc.counts.length; j++){
         var c = sc.counts[j], ds = c.dataset;
         var a = ds.at ? parseFloat(ds.at) : 0, b = ds.end ? parseFloat(ds.end) : 1;
@@ -607,10 +619,10 @@ class Component extends DCLogic {
         d.style.strokeDashoffset = (d._len * (1 - this.sub(p, a2, b2))).toFixed(1);
       }
     }
-    var chs = this.qa('[data-chapter]'), vc = (window.innerHeight || 800) / 2, act = null;
-    for (var m = 0; m < chs.length; m++){ var rr = chs[m].getBoundingClientRect(); if (rr.top <= vc && rr.bottom >= vc) act = chs[m].getAttribute('data-chapter'); }
+    var vc = vh / 2, act = null;
+    for (var m2 = 0; m2 < chn; m2++){ var rr = chr[m2]; if (rr.top <= vc && rr.bottom >= vc) act = chs[m2].getAttribute('data-chapter'); }
     if (act && act !== this._act){ this._act = act; this.setActive(act); }
-    if (this.enters){ var vh2 = window.innerHeight || 800; for (var z = 0; z < this.enters.length; z++){ var e = this.enters[z]; if (e._shown) continue; var er = e.getBoundingClientRect(); if (er.top < vh2 * 0.9 && er.bottom > 0){ e.style.opacity = '1'; e.style.transform = 'none'; e._shown = true; } } }
+    if (en){ for (var z2 = 0; z2 < enn; z2++){ var e = en[z2]; if (e._shown) continue; var er = enr[z2]; if (er && er.top < vh * 0.9 && er.bottom > 0){ e.style.opacity = '1'; e.style.transform = 'none'; e._shown = true; } } }
   }
   setActive(id){
     this.qa('[data-rail]').forEach(function(r){
@@ -625,7 +637,7 @@ class Component extends DCLogic {
     (this.rootEl || document.documentElement).setAttribute('dir', ar ? 'rtl' : 'ltr');
     this.qa('[data-ar]').forEach(function(el){ if (el._en == null) el._en = el.innerHTML; el.innerHTML = ar ? el.getAttribute('data-ar') : el._en; });
   }
-  tick(){ this.update(); this._loop = requestAnimationFrame(this.tick); }
+  tick(){ if (this._dirty){ this._dirty = false; this.update(); } this.raf = requestAnimationFrame(this.tick); }
   renderVals(){ return { rootRef: this.setRoot }; }
 }
 </script>
