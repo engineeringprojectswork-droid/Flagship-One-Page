@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:clip;max-width:100%}
+html{scroll-behavior:smooth}
 body{margin:0;background:#06060c;color:#f3f4ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip;overscroll-behavior-y:none}
 [dir="rtl"]{font-family:"IBM Plex Sans Arabic","SF Arabic","Segoe UI",Tahoma,sans-serif}
 ::selection{background:rgba(255,55,95,.32)}
@@ -64,7 +64,7 @@ img{-webkit-user-drag:none;user-drag:none}
 
   <main>
   <!-- ============ HERO ============ -->
-  <section id="top" data-chapter="hero" data-accent="#7a86e8" data-chapnum="00" data-chaptitle="Intro" data-chaptitle-ar="مقدمة" data-screen-label="Intro" style="position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(env(safe-area-inset-top) + 92px) 26px calc(env(safe-area-inset-bottom) + 84px)">
+  <section id="top" data-chapter="hero" data-accent="#7a86e8" data-chapnum="00" data-chaptitle="Intro" data-chaptitle-ar="مقدمة" data-screen-label="Intro" style="position:relative;z-index:1;overflow-x:clip;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(env(safe-area-inset-top) + 92px) 26px calc(env(safe-area-inset-bottom) + 84px)">
     <div aria-hidden="true" style="position:absolute;left:50%;top:34%;width:min(88vw,420px);aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(closest-side, rgba(41,151,255,.16), transparent 70%);filter:blur(8px);animation:mmFloat 12s ease-in-out infinite;pointer-events:none"></div>
     <div style="position:relative">
       <p data-ar="محمد محمود · الكويت" style="margin:0 0 20px;font:500 11px/1.5 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:#6f74a0;text-transform:uppercase;animation:mmRise .9s cubic-bezier(.16,1,.3,1) .1s both">Mohamed Mahmoud · Kuwait</p>
@@ -77,7 +77,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ THESIS ============ -->
-  <section data-chapter="hero" data-accent="#7a86e8" data-chapnum="00" data-chaptitle="The thesis" data-chaptitle-ar="الأطروحة" style="position:relative;z-index:1;min-height:92svh;display:flex;align-items:center;padding:96px 26px">
+  <section data-chapter="hero" data-accent="#7a86e8" data-chapnum="00" data-chaptitle="The thesis" data-chaptitle-ar="الأطروحة" style="position:relative;z-index:1;overflow-x:clip;min-height:92svh;display:flex;align-items:center;padding:96px 26px">
     <div style="max-width:34ch">
       <p data-enter data-ar="الأطروحة" style="opacity:0;transform:translateY(22px);transition:.9s cubic-bezier(.16,1,.3,1);margin:0 0 18px;font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.3em;color:#6f74a0;text-transform:uppercase">The thesis</p>
       <h2 data-enter data-ar="ليس مُختصًّا. بل نظام تشغيلٍ من شخصٍ واحد." style="opacity:0;transform:translateY(22px);transition:.9s cubic-bezier(.16,1,.3,1) .08s;margin:0;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(30px,8vw,46px);line-height:1.05;letter-spacing:-.03em">Not a specialist. A one-person operating system.</h2>
@@ -95,7 +95,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 01 · PAID SOCIAL ============ -->
-  <section id="ch-meta-ads" data-chapter="meta-ads" data-accent="#2997ff" data-chapnum="01" data-chaptitle="Paid social" data-chaptitle-ar="إعلانات" data-screen-label="01 Paid social" style="--a:#2997ff;position:relative;z-index:1">
+  <section id="ch-meta-ads" data-chapter="meta-ads" data-accent="#2997ff" data-chapnum="01" data-chaptitle="Paid social" data-chaptitle-ar="إعلانات" data-screen-label="01 Paid social" style="--a:#2997ff;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1440vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 70px) 24px calc(env(safe-area-inset-bottom) + 68px)">
         <div aria-hidden="true" style="position:absolute;inset-inline-start:-12%;top:34%;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34vw;line-height:.8;color:rgba(41,151,255,.05);letter-spacing:-.04em;transform:translateY(calc(var(--p,0) * -70px));pointer-events:none;white-space:nowrap">$0.84</div>
@@ -179,7 +179,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 02 · AUDIENCE / AL-MAALI ============ -->
-  <section id="ch-almaali" data-chapter="almaali" data-accent="#ff453a" data-chapnum="02" data-chaptitle="Audience growth" data-chaptitle-ar="نمو الجمهور" data-screen-label="02 Audience" style="--a:#ff453a;position:relative;z-index:1">
+  <section id="ch-almaali" data-chapter="almaali" data-accent="#ff453a" data-chapnum="02" data-chaptitle="Audience growth" data-chaptitle-ar="نمو الجمهور" data-screen-label="02 Audience" style="--a:#ff453a;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1540vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 70px) 24px calc(env(safe-area-inset-bottom) + 68px)">
         <div aria-hidden="true" style="position:absolute;inset-inline-end:-8%;top:8%;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30vw;line-height:.8;color:rgba(255,69,58,.05);letter-spacing:-.04em;transform:translateX(calc(var(--p,0) * -40px));pointer-events:none;white-space:nowrap">1M+</div>
@@ -274,7 +274,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 03 · CRM ============ -->
-  <section id="ch-crm" data-chapter="crm" data-accent="#30d158" data-chapnum="03" data-chaptitle="Marketing ops" data-chaptitle-ar="عمليات التسويق" data-screen-label="03 CRM" style="--a:#30d158;position:relative;z-index:1">
+  <section id="ch-crm" data-chapter="crm" data-accent="#30d158" data-chapnum="03" data-chaptitle="Marketing ops" data-chaptitle-ar="عمليات التسويق" data-screen-label="03 CRM" style="--a:#30d158;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1480vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 70px) 24px calc(env(safe-area-inset-bottom) + 68px)">
         <div style="position:relative;flex:none">
@@ -346,7 +346,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 04 · BRAND & CONTENT ============ -->
-  <section id="ch-brand" data-chapter="brand" data-accent="#bf5af2" data-chapnum="04" data-chaptitle="Brand & content" data-chaptitle-ar="الهوية والمحتوى" data-screen-label="04 Brand" style="--a:#bf5af2;position:relative;z-index:1">
+  <section id="ch-brand" data-chapter="brand" data-accent="#bf5af2" data-chapnum="04" data-chaptitle="Brand & content" data-chaptitle-ar="الهوية والمحتوى" data-screen-label="04 Brand" style="--a:#bf5af2;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1320vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 70px) 24px calc(env(safe-area-inset-bottom) + 68px)">
         <div style="position:relative;flex:none">
@@ -396,7 +396,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 05 · SOFTWARE / SHEEP APP ============ -->
-  <section id="ch-sheep" data-chapter="sheep" data-accent="#64d2ff" data-chapnum="05" data-chaptitle="Software" data-chaptitle-ar="برمجيات" data-screen-label="05 Software" style="--a:#64d2ff;position:relative;z-index:1">
+  <section id="ch-sheep" data-chapter="sheep" data-accent="#64d2ff" data-chapnum="05" data-chaptitle="Software" data-chaptitle-ar="برمجيات" data-screen-label="05 Software" style="--a:#64d2ff;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1480vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 70px) 24px calc(env(safe-area-inset-bottom) + 68px)">
         <div style="position:relative;flex:none">
@@ -470,7 +470,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 06 · HIRING AUTOMATION ============ -->
-  <section id="ch-hr" data-chapter="hr" data-accent="#ffd60a" data-chapnum="06" data-chaptitle="Automation" data-chaptitle-ar="الأتمتة" data-screen-label="06 Hiring" style="--a:#ffd60a;position:relative;z-index:1">
+  <section id="ch-hr" data-chapter="hr" data-accent="#ffd60a" data-chapnum="06" data-chaptitle="Automation" data-chaptitle-ar="الأتمتة" data-screen-label="06 Hiring" style="--a:#ffd60a;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1440vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 70px) 24px calc(env(safe-area-inset-bottom) + 68px)">
         <div style="position:relative;flex:none">
@@ -539,7 +539,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 07 · MEDMAC WEBSITE ============ -->
-  <section id="ch-web" data-chapter="web" data-accent="#7574ee" data-chapnum="07" data-chaptitle="Web · live" data-chaptitle-ar="الويب · مباشر" data-screen-label="07 Web" style="--a:#7574ee;position:relative;z-index:1">
+  <section id="ch-web" data-chapter="web" data-accent="#7574ee" data-chapnum="07" data-chaptitle="Web · live" data-chaptitle-ar="الويب · مباشر" data-screen-label="07 Web" style="--a:#7574ee;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1320vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 70px) 24px calc(env(safe-area-inset-bottom) + 68px)">
         <div style="position:relative;flex:none">
@@ -583,7 +583,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 08 · AI OPERATING MODEL ============ -->
-  <section id="ch-ai" data-chapter="ai" data-accent="#ff9f0a" data-chapnum="08" data-chaptitle="AI operating model" data-chaptitle-ar="نموذج تشغيل الذكاء" data-screen-label="08 AI model" style="--a:#ff9f0a;position:relative;z-index:1">
+  <section id="ch-ai" data-chapter="ai" data-accent="#ff9f0a" data-chapnum="08" data-chaptitle="AI operating model" data-chaptitle-ar="نموذج تشغيل الذكاء" data-screen-label="08 AI model" style="--a:#ff9f0a;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1360vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 70px) 24px calc(env(safe-area-inset-bottom) + 68px)">
         <div style="position:relative;flex:none">
@@ -622,7 +622,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </section>
 
   <!-- ============ 09 · CAREER OS ============ -->
-  <section id="ch-resume" data-chapter="resume" data-accent="#bf5af2" data-chapnum="09" data-chaptitle="Career OS" data-chaptitle-ar="نظام المسيرة" data-screen-label="09 Career OS" style="--a:#bf5af2;position:relative;z-index:1">
+  <section id="ch-resume" data-chapter="resume" data-accent="#bf5af2" data-chapnum="09" data-chaptitle="Career OS" data-chaptitle-ar="نظام المسيرة" data-screen-label="09 Career OS" style="--a:#bf5af2;position:relative;z-index:1;overflow-x:clip">
     <div data-scene style="position:relative;height:1050vh">
       <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(env(safe-area-inset-top) + 84px) 26px calc(env(safe-area-inset-bottom) + 80px)">
         <div aria-hidden="true" style="position:absolute;left:50%;top:46%;width:min(96vw,480px);aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(closest-side, rgba(191,90,242,.16), transparent 70%);filter:blur(14px);pointer-events:none"></div>
@@ -644,7 +644,7 @@ img{-webkit-user-drag:none;user-drag:none}
   <!--SCENES-->
 
   <!-- ============ CONTACT FINALE ============ -->
-  <section data-chapter="contact" data-accent="#e8ecff" data-chapnum="10" data-chaptitle="Contact" data-chaptitle-ar="تواصل" data-screen-label="Contact" style="position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(env(safe-area-inset-top) + 96px) 26px calc(env(safe-area-inset-bottom) + 96px)">
+  <section data-chapter="contact" data-accent="#e8ecff" data-chapnum="10" data-chaptitle="Contact" data-chaptitle-ar="تواصل" data-screen-label="Contact" style="position:relative;z-index:1;overflow-x:clip;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(env(safe-area-inset-top) + 96px) 26px calc(env(safe-area-inset-bottom) + 96px)">
     <div aria-hidden="true" style="position:absolute;left:50%;top:44%;width:min(96vw,560px);aspect-ratio:1.4;transform:translate(-50%,-50%);background:radial-gradient(closest-side, rgba(41,151,255,.12), transparent 70%),radial-gradient(closest-side, rgba(255,55,95,.08), transparent 76%);filter:blur(14px);pointer-events:none"></div>
     <p data-enter data-ar="العرض" style="opacity:0;transform:translateY(22px);transition:.9s cubic-bezier(.16,1,.3,1);margin:0 0 20px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.3em;color:#6f74a0;text-transform:uppercase">The offer</p>
     <h2 data-enter data-ar="وظّف واحدًا. &lt;span style='background:linear-gradient(100deg,#2997ff,#bf5af2 50%,#ff453a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent'&gt;احصل على فريق.&lt;/span&gt;" style="opacity:0;transform:translateY(22px);transition:.9s cubic-bezier(.16,1,.3,1) .08s;margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(46px,15vw,88px);line-height:.96;letter-spacing:-.035em">Hire one.<br><span style="background:linear-gradient(100deg,#2997ff,#bf5af2 50%,#ff453a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Get a team.</span></h2>
