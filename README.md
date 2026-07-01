@@ -20,5 +20,5 @@ A one-page, scroll-driven site — **"A whole marketing team. In one person."** 
 
 ## Before it goes fully public
 
-1. **Contact links are placeholders.** The "Hire one. Get a team." section has WhatsApp/Email/LinkedIn chips reading `↗ add link` — replace with Mohamed's real links (WhatsApp: **90022918**; email + LinkedIn still needed).
+1. ~~Contact links are placeholders.~~ **Done** — the "Hire one. Get a team." chips now link to WhatsApp (`wa.me/96590022918`), Email (`medo433447@gmail.com`), and LinkedIn (`in/mohamed-mahmoud-5a748b243`).
 2. Optional: capture live screenshots for the Web and AI-operating-model scenes (see `deploy/DEPLOY-for-Claude-Code.md`). Neither blocks launch.
