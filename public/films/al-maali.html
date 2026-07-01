@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="darkreader-lock">
+<title>Audience Growth — Story Film</title>
+<style>
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100%; }
+  body{
+    background:#0c060a;
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding:clamp(14px,4vw,48px);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+
+  /* ---------- Frame ---------- */
+  .film{
+    --accentA:#ff375f;
+    --accentB:#ff7eb6;
+    --dur:5000ms;
+    position:relative;
+    width:min(100%,1120px);
+    aspect-ratio:16/9;
+    background:radial-gradient(130% 100% at 50% -10%, #200912 0%, #0d070b 52%, #07050a 100%);
+    color:#fff;
+    border-radius:clamp(16px,2vw,24px);
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 50px 130px -50px rgba(255,55,95,.34), 0 1px 0 rgba(255,255,255,.05) inset;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    isolation:isolate; -webkit-tap-highlight-color:transparent;
+  }
+  @media (max-width:640px){ .film{ aspect-ratio:3/4; } }
+
+  .film[dir="rtl"]{ font-family:"SF Arabic","Segoe UI","Noto Sans Arabic",Tahoma,sans-serif; }
+  .film[dir="rtl"] .headline{ letter-spacing:0; line-height:1.18; font-size:clamp(28px,4.9vw,62px); }
+  .film[dir="rtl"] .eyebrow{ letter-spacing:.18em; }
+  .film[dir="rtl"] .caption{ line-height:1.6; font-size:clamp(16px,2.05vw,24px); }
+
+  /* ---------- Ambient cosmic bed ---------- */
+  .sky{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .stars{
+    position:absolute; inset:-20%;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 22%, rgba(255,255,255,.7), transparent 60%),
+      radial-gradient(1.2px 1.2px at 78% 14%, rgba(255,200,220,.6), transparent 60%),
+      radial-gradient(1px 1px at 35% 68%, rgba(255,255,255,.55), transparent 60%),
+      radial-gradient(1.6px 1.6px at 62% 78%, rgba(255,170,200,.5), transparent 60%),
+      radial-gradient(1px 1px at 88% 52%, rgba(255,255,255,.5), transparent 60%),
+      radial-gradient(1.2px 1.2px at 22% 86%, rgba(255,190,210,.5), transparent 60%),
+      radial-gradient(1px 1px at 50% 36%, rgba(255,255,255,.45), transparent 60%);
+    animation:twinkle 7s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{ 0%{opacity:.5} 100%{opacity:.95} }
+  .aurora{
+    position:absolute; width:90%; aspect-ratio:1; left:50%; top:-34%; transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(255,55,95,.2), transparent 62%);
+    filter:blur(20px); animation:breathe 7s ease-in-out infinite;
+  }
+  @keyframes breathe{ 0%,100%{ transform:translateX(-50%) scale(1); opacity:.7 } 50%{ transform:translateX(-50%) scale(1.12); opacity:1 } }
+
+  .stage{ position:absolute; inset:0; z-index:1; }
+
+  /* ---------- Scenes ---------- */
+  .scene{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:clamp(26px,5.2vw,76px);
+    opacity:0; pointer-events:none; transition:opacity .8s cubic-bezier(.4,0,.2,1);
+  }
+  .scene.is-active{ opacity:1; pointer-events:auto; }
+  .scene > *{ position:relative; z-index:1; }
+
+  .glow{ position:absolute; z-index:0; border-radius:50%; filter:blur(72px); pointer-events:none; opacity:0; transition:opacity 1s ease; }
+  .scene.is-active .glow{ opacity:1; }
+  .glow--1{ width:54%; aspect-ratio:1; top:50%; left:50%; transform:translate(-50%,-50%); background:radial-gradient(circle,rgba(255,55,95,.42),transparent 64%); }
+  .glow--2{ width:46%; aspect-ratio:1; top:12%; right:-10%; background:radial-gradient(circle,rgba(255,126,182,.4),transparent 66%); }
+  .glow--3{ width:64%; aspect-ratio:1; bottom:-20%; left:50%; transform:translateX(-50%); background:radial-gradient(circle,rgba(255,55,95,.44),transparent 66%); }
+  .glow--4{ width:72%; aspect-ratio:1; top:50%; left:50%; transform:translate(-50%,-50%); background:radial-gradient(circle,rgba(255,126,182,.5),transparent 62%); }
+
+  /* ---------- Type ---------- */
+  .eyebrow{ margin:0 0 clamp(16px,2.4vw,24px); font-size:clamp(11px,1.35vw,13px); font-weight:600; letter-spacing:.34em; text-transform:uppercase; color:rgba(255,255,255,.46); }
+  .headline{ margin:0; font-size:clamp(27px,4.7vw,60px); line-height:1.05; font-weight:800; letter-spacing:-.03em; max-width:21ch; text-wrap:balance; }
+  .caption{ margin:clamp(20px,3vw,30px) 0 0; font-size:clamp(15px,1.95vw,23px); font-weight:500; letter-spacing:-.01em; color:rgba(255,255,255,.62); max-width:34ch; text-wrap:balance; }
+  .accent{ background:linear-gradient(90deg,var(--accentA),var(--accentB)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+
+  .anim{ opacity:0; transform:translateY(18px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+  .scene.is-active .anim{ opacity:1; transform:none; }
+
+  /* ---------- Scene 1 · broadcast rings ---------- */
+  .beacon{ position:relative; width:min(48vw,300px); height:min(34vw,210px); margin-top:clamp(16px,2.4vw,26px); display:grid; place-items:center; }
+  .ring{ position:absolute; left:50%; top:50%; width:48px; height:48px; border-radius:50%; border:1.5px solid rgba(255,126,182,.55); transform:translate(-50%,-50%) scale(.4); opacity:0; }
+  .scene.is-active .ring{ animation:signal 3.6s cubic-bezier(.16,1,.3,1) infinite; }
+  .scene.is-active .ring:nth-child(2){ animation-delay:.9s; }
+  .scene.is-active .ring:nth-child(3){ animation-delay:1.8s; }
+  .scene.is-active .ring:nth-child(4){ animation-delay:2.7s; }
+  @keyframes signal{ 0%{ transform:translate(-50%,-50%) scale(.4); opacity:0 } 14%{ opacity:.9 } 100%{ transform:translate(-50%,-50%) scale(5.4); opacity:0 } }
+  .core{ position:relative; width:46px; height:46px; border-radius:50%; background:radial-gradient(circle,#fff,var(--accentB) 55%,var(--accentA)); box-shadow:0 0 50px 6px rgba(255,55,95,.7); animation:corebeat 2.8s ease-in-out infinite; }
+  @keyframes corebeat{ 0%,100%{ transform:scale(1); box-shadow:0 0 40px 4px rgba(255,55,95,.55) } 50%{ transform:scale(1.12); box-shadow:0 0 64px 10px rgba(255,55,95,.85) } }
+  .core::after{ content:""; position:absolute; inset:34%; border-radius:50%; background:#fff; }
+
+  /* ---------- Scene 2 · platform fan (vertical) ---------- */
+  .fan{ position:relative; width:min(100%,600px); margin-top:clamp(16px,2.4vw,28px); display:flex; flex-direction:column; align-items:center; gap:clamp(8px,1.2vw,12px); }
+  .hub{ display:flex; flex-direction:column; gap:3px; padding:clamp(11px,1.5vw,17px) clamp(16px,2.2vw,26px); border-radius:14px; flex:none; z-index:2; align-items:center;
+        background:linear-gradient(180deg,rgba(255,55,95,.2),rgba(255,55,95,.05)); border:1px solid rgba(255,126,182,.5);
+        box-shadow:0 0 0 1px rgba(255,126,182,.18), 0 16px 50px -18px rgba(255,55,95,.8); }
+  .hub__k{ font-weight:650; font-size:clamp(13px,1.7vw,18px); letter-spacing:-.01em; }
+  .hub__s{ font-size:clamp(10px,1.1vw,12px); color:rgba(255,255,255,.5); }
+  .fanbody{ position:relative; width:100%; height:clamp(102px,15vw,146px); }
+  .fan__svg{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible; z-index:0; }
+  .fan__line{ fill:none; stroke:url(#fg); stroke-width:1.6; stroke-dasharray:1; stroke-dashoffset:1; pathLength:1; }
+  .scene.is-active .fan__line{ animation:draw 1s cubic-bezier(.4,0,.2,1) forwards; }
+  .scene.is-active .fan__line:nth-child(1){ animation-delay:.7s; } .scene.is-active .fan__line:nth-child(2){ animation-delay:.85s; }
+  .scene.is-active .fan__line:nth-child(3){ animation-delay:1s; } .scene.is-active .fan__line:nth-child(4){ animation-delay:1.15s; }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .tiles-row{ position:absolute; left:0; right:0; bottom:0; display:flex; gap:clamp(7px,1.2vw,13px); z-index:1; }
+  .tile{ flex:1 1 0; display:flex; align-items:center; justify-content:center; gap:8px; padding:clamp(9px,1.2vw,13px) clamp(8px,1.3vw,14px); border-radius:12px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); font-size:clamp(12px,1.45vw,16px); font-weight:600; }
+  .tile .dot{ width:7px; height:7px; border-radius:50%; background:linear-gradient(90deg,var(--accentA),var(--accentB)); box-shadow:0 0 10px var(--accentA); flex:none; }
+  .subline{ margin-top:clamp(18px,2.6vw,28px); font-size:clamp(11px,1.4vw,15px); letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.42); }
+
+  /* ---------- Scene 3 · the climb ---------- */
+  .climb{ position:relative; width:min(100%,620px); margin-top:clamp(6px,1.4vw,14px); }
+  .climb__chart{ position:relative; height:clamp(96px,15vw,168px); margin-bottom:clamp(6px,1.4vw,12px); }
+  .climb__chart svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+  .climb__area{ opacity:0; transition:opacity .6s ease .3s; }
+  .scene.is-active .climb__area{ opacity:1; }
+  .climb__line{ fill:none; stroke:url(#cg); stroke-width:2.4; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; pathLength:1; filter:drop-shadow(0 2px 12px rgba(255,55,95,.6)); }
+  .scene.is-active .climb__line{ animation:draw 2.1s cubic-bezier(.22,.61,.36,1) forwards .35s; }
+  .climb__num{ display:block; font-size:clamp(46px,9vw,104px); font-weight:800; line-height:1; letter-spacing:-.04em; font-variant-numeric:tabular-nums;
+    background:linear-gradient(180deg,var(--accentB),var(--accentA)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+    filter:drop-shadow(0 8px 44px rgba(255,55,95,.5)); }
+  .climb__from{ display:block; font-size:clamp(12px,1.5vw,16px); letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.46); margin-bottom:6px; }
+  .stats{ display:flex; justify-content:center; gap:clamp(8px,1.6vw,18px); margin-top:clamp(16px,2.4vw,26px); flex-wrap:wrap; }
+  .stat{ display:flex; flex-direction:column; gap:2px; padding:clamp(9px,1.3vw,14px) clamp(13px,1.8vw,22px); border-radius:13px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.1); min-width:clamp(96px,13vw,128px); }
+  .stat__n{ font-size:clamp(17px,2.4vw,28px); font-weight:800; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+  .stat__l{ font-size:clamp(10px,1.15vw,12.5px); color:rgba(255,255,255,.5); letter-spacing:.04em; }
+  .stat__from{ font-size:clamp(9px,1vw,11px); color:rgba(255,255,255,.38); }
+
+  /* ---------- Scene 4 · number ---------- */
+  .big{ opacity:0; transform:scale(.74); transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); transition-delay:.12s; }
+  .scene.is-active .big{ opacity:1; transform:scale(1); }
+  .big__num{ display:block; font-size:clamp(76px,17vw,210px); font-weight:800; line-height:1; letter-spacing:-.045em; font-variant-numeric:tabular-nums;
+    background:linear-gradient(180deg,var(--accentB),var(--accentA)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+    filter:drop-shadow(0 12px 60px rgba(255,55,95,.5)); }
+
+  /* ---------- Controls ---------- */
+  .controls{ position:absolute; left:0; right:0; bottom:clamp(16px,2.6vw,28px); z-index:6; display:flex; align-items:center; justify-content:center; gap:16px; user-select:none; }
+  .playpause{ width:27px; height:27px; flex:none; display:grid; place-items:center; border-radius:50%; cursor:pointer; color:#fff; padding:0; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.22); transition:background .25s, border-color .25s; }
+  .playpause:hover{ background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.4); }
+  .playpause:focus-visible{ outline:2px solid var(--accentB); outline-offset:3px; }
+  .film.is-playing .ic--play{ display:none; }
+  .film:not(.is-playing) .ic--pause{ display:none; }
+  .dots{ display:flex; align-items:center; gap:8px; }
+  .dot{ position:relative; width:7px; height:7px; padding:0; border:0; cursor:pointer; border-radius:99px; overflow:hidden; background:rgba(255,255,255,.28); transition:width .5s cubic-bezier(.4,0,.2,1), background .4s; }
+  .dot:hover{ background:rgba(255,255,255,.5); }
+  .dot:focus-visible{ outline:2px solid var(--accentB); outline-offset:3px; }
+  .dot.active{ width:36px; background:rgba(255,255,255,.18); }
+  .dot .fill{ position:absolute; inset:0; width:0; border-radius:99px; background:linear-gradient(90deg,var(--accentA),var(--accentB)); }
+  .film[dir="rtl"] .dot .fill{ inset:0 0 0 auto; }
+  .dot.active .fill{ animation:dotfill var(--dur) linear forwards; }
+  .film.is-paused .dot.active .fill{ animation-play-state:paused; }
+  @keyframes dotfill{ from{ width:0; } to{ width:100%; } }
+
+  @media (max-width:560px){
+    .fanbody{ height:auto; }
+    .fan__svg{ display:none; }
+    .tiles-row{ position:static; flex-wrap:wrap; }
+    .tile{ flex:1 1 40%; }
+    .stats{ gap:8px; }
+    .stat{ min-width:0; flex:1 1 28%; padding:9px 8px; }
+  }
+</style>
+</head>
+<body>
+  <div class="film is-playing" id="film" role="group" aria-roledescription="story film" aria-label="Audience growth — project story film">
+    <div class="sky" aria-hidden="true"><div class="stars"></div><div class="aurora"></div></div>
+    <div class="stage">
+
+      <!-- Scene 1 · The channel -->
+      <section class="scene is-active" data-scene="0" aria-label="Scene 1 of 4">
+        <span class="glow glow--1" aria-hidden="true"></span>
+        <p class="eyebrow anim" data-i18n="s1eyebrow">The channel</p>
+        <h2 class="headline anim" style="transition-delay:.08s" data-i18n="s1head">An Islamic satellite channel.<br><span class="accent">I owned its whole social presence.</span></h2>
+        <div class="beacon anim" style="transition-delay:.5s" aria-hidden="true">
+          <span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="ring"></span>
+          <span class="core"></span>
+        </div>
+      </section>
+
+      <!-- Scene 2 · The engine -->
+      <section class="scene" data-scene="1" aria-label="Scene 2 of 4" aria-hidden="true">
+        <span class="glow glow--2" aria-hidden="true"></span>
+        <p class="eyebrow anim" data-i18n="s2eyebrow">The engine</p>
+        <h2 class="headline anim" style="transition-delay:.08s" data-i18n="s2head">One content engine, <span class="accent">four platforms.</span></h2>
+        <div class="fan" aria-hidden="true">
+          <div class="hub anim" style="transition-delay:.5s"><span class="hub__k" data-i18n="s2hubk">Content engine</span><span class="hub__s" data-i18n="s2hubs">one source</span></div>
+          <div class="fanbody">
+            <svg class="fan__svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7eb6"/><stop offset="1" stop-color="#ff375f"/></linearGradient></defs>
+              <path class="fan__line" d="M50,3 C50,46 12.5,52 12.5,97"/>
+              <path class="fan__line" d="M50,3 C50,46 37.5,52 37.5,97"/>
+              <path class="fan__line" d="M50,3 C50,46 62.5,52 62.5,97"/>
+              <path class="fan__line" d="M50,3 C50,46 87.5,52 87.5,97"/>
+            </svg>
+            <div class="tiles-row">
+              <div class="tile anim" style="transition-delay:.9s"><span class="dot"></span><span data-i18n="s2t1">Facebook</span></div>
+              <div class="tile anim" style="transition-delay:1.05s"><span class="dot"></span><span data-i18n="s2t2">Instagram</span></div>
+              <div class="tile anim" style="transition-delay:1.2s"><span class="dot"></span><span data-i18n="s2t3">TikTok</span></div>
+              <div class="tile anim" style="transition-delay:1.35s"><span class="dot"></span><span data-i18n="s2t4">YouTube</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="subline anim" style="transition-delay:1.6s" data-i18n="s2sub">strategy &middot; calendar &middot; per-platform optimization</p>
+      </section>
+
+      <!-- Scene 3 · The climb -->
+      <section class="scene" data-scene="2" aria-label="Scene 3 of 4" aria-hidden="true">
+        <span class="glow glow--3" aria-hidden="true"></span>
+        <p class="eyebrow anim" data-i18n="s3eyebrow">The climb</p>
+        <div class="climb">
+          <div class="climb__chart anim" style="transition-delay:.3s">
+            <svg viewBox="0 0 100 50" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff375f"/><stop offset="1" stop-color="#ff7eb6"/></linearGradient>
+                <linearGradient id="ca" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,55,95,.42)"/><stop offset="1" stop-color="rgba(255,55,95,0)"/></linearGradient>
+              </defs>
+              <path class="climb__area" d="M2,48 C30,47 48,42 66,30 C78,22 88,9 98,3 L98,50 L2,50 Z" fill="url(#ca)"/>
+              <path class="climb__line" d="M2,48 C30,47 48,42 66,30 C78,22 88,9 98,3"/>
+            </svg>
+          </div>
+          <span class="climb__from anim" style="transition-delay:.4s" data-i18n="s3from">Facebook &middot; 9.2K &rarr;</span>
+          <span class="climb__num" data-to="1000000" data-from="9200" data-fmt="compact" data-suffix="+" data-dur="2200">1M+</span>
+        </div>
+        <div class="stats">
+          <div class="stat anim" style="transition-delay:.7s"><span class="stat__n" data-to="50000" data-from="3000" data-fmt="compact">50K</span><span class="stat__l" data-i18n="s3i">Instagram</span><span class="stat__from" data-i18n="s3if">from 3K</span></div>
+          <div class="stat anim" style="transition-delay:.85s"><span class="stat__n" data-to="33000" data-fmt="compact">33K</span><span class="stat__l" data-i18n="s3tk">TikTok</span><span class="stat__from" data-i18n="s3tf">from 0</span></div>
+          <div class="stat anim" style="transition-delay:1s"><span class="stat__n" data-to="43000" data-fmt="compact">43K</span><span class="stat__l" data-i18n="s3yt">YouTube</span><span class="stat__from" data-i18n="s3yf">from 0</span></div>
+        </div>
+        <p class="caption anim" style="transition-delay:1.2s" data-i18n="s3cap">Facebook alone: <span class="accent">9.2K to a million.</span></p>
+      </section>
+
+      <!-- Scene 4 · The number -->
+      <section class="scene" data-scene="3" aria-label="Scene 4 of 4" aria-hidden="true">
+        <span class="glow glow--4" aria-hidden="true"></span>
+        <p class="eyebrow anim" data-i18n="s4eyebrow">The number</p>
+        <div class="big"><span class="big__num" data-to="1000000" data-from="0" data-fmt="compact" data-suffix="+" data-dur="2000">1M+</span></div>
+        <p class="caption anim" style="transition-delay:.65s" data-i18n="s4cap">Facebook followers. 2021&ndash;2025. <span class="accent">Most marketers never reach it.</span></p>
+      </section>
+
+    </div><!-- /stage -->
+
+    <div class="controls">
+      <button class="playpause" id="pp" type="button" aria-label="Pause">
+        <svg class="ic ic--pause" width="11" height="11" viewBox="0 0 11 11" aria-hidden="true"><rect x="1.6" y="1" width="2.6" height="9" rx="1" fill="currentColor"/><rect x="6.8" y="1" width="2.6" height="9" rx="1" fill="currentColor"/></svg>
+        <svg class="ic ic--play" width="11" height="11" viewBox="0 0 11 11" aria-hidden="true"><path d="M2.6 1.1 9.6 5.5 2.6 9.9 Z" fill="currentColor"/></svg>
+      </button>
+      <div class="dots" role="tablist" aria-label="Chapters">
+        <button class="dot active" type="button" data-go="0" role="tab" aria-selected="true"  data-i18n-aria="d1"><span class="fill"></span></button>
+        <button class="dot"        type="button" data-go="1" role="tab" aria-selected="false" data-i18n-aria="d2"><span class="fill"></span></button>
+        <button class="dot"        type="button" data-go="2" role="tab" aria-selected="false" data-i18n-aria="d3"><span class="fill"></span></button>
+        <button class="dot"        type="button" data-go="3" role="tab" aria-selected="false" data-i18n-aria="d4"><span class="fill"></span></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var AR = {
+      _title:"النمو الجماهيري — فيلم المشروع",
+      _aria:"النمو الجماهيري — فيلم قصة المشروع",
+      s1eyebrow:"القناة",
+      s1head:'قناة فضائية إسلامية.<br><span class="accent">تولّيتُ حضورها الاجتماعي بالكامل.</span>',
+      s2eyebrow:"المحرّك",
+      s2head:'محرّك محتوى واحد، <span class="accent">أربع منصّات.</span>',
+      s2hubk:"محرّك المحتوى", s2hubs:"مصدر واحد",
+      s2t1:"فيسبوك", s2t2:"إنستغرام", s2t3:"تيك توك", s2t4:"يوتيوب",
+      s2sub:"استراتيجية · تقويم · تحسين لكل منصّة",
+      s3eyebrow:"الصعود",
+      s3from:"فيسبوك · ٩٫٢ ألف ←",
+      s3i:"إنستغرام", s3if:"من ٣ آلاف",
+      s3tk:"تيك توك", s3tf:"من صفر",
+      s3yt:"يوتيوب", s3yf:"من صفر",
+      s3cap:'فيسبوك وحده: <span class="accent">من ٩٫٢ ألف إلى مليون.</span>',
+      s4eyebrow:"الرقم",
+      s4cap:'متابع على فيسبوك. ٢٠٢١–٢٠٢٥. <span class="accent">ومعظم المسوّقين لا يبلغونه.</span>',
+      d1:"الفصل ١ — القناة", d2:"الفصل ٢ — المحرّك", d3:"الفصل ٣ — الصعود", d4:"الفصل ٤ — الرقم"
+    };
+    var EN_ARIA = { d1:"Chapter 1 — The channel", d2:"Chapter 2 — The engine", d3:"Chapter 3 — The climb", d4:"Chapter 4 — The number" };
+
+    var film = document.getElementById('film');
+    var params = new URLSearchParams(location.search);
+    var isAR = params.get('lang')==='ar';
+    if(isAR){
+      document.documentElement.lang='ar';
+      film.setAttribute('dir','rtl'); film.setAttribute('aria-label', AR._aria); document.title=AR._title;
+      film.querySelectorAll('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(AR[k]!=null) el.innerHTML=AR[k]; });
+      film.querySelectorAll('[data-i18n-aria]').forEach(function(el){ var k=el.getAttribute('data-i18n-aria'); if(AR[k]!=null) el.setAttribute('aria-label',AR[k]); });
+    } else {
+      film.querySelectorAll('[data-i18n-aria]').forEach(function(el){ var k=el.getAttribute('data-i18n-aria'); if(EN_ARIA[k]!=null) el.setAttribute('aria-label',EN_ARIA[k]); });
+    }
+
+    var sceneEls=[].slice.call(film.querySelectorAll('.scene'));
+    var dotEls=[].slice.call(film.querySelectorAll('.dot'));
+    var pp=document.getElementById('pp');
+    var N=sceneEls.length, DURATION=5000;
+    var idx=0, playing=true, timer=null, startedAt=0, remaining=DURATION, wasPlaying=false, counts=[];
+
+    function fmtPlain(v,dec){ return Number(v).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+    function fmtCompact(v){
+      if(v>=1e6){ var m=v/1e6; return (m>=10?Math.round(m):Math.round(m*10)/10).toString().replace(/\.0$/,'')+'M'; }
+      if(v>=1e3){ var k=v/1e3; return (k>=100?Math.round(k):Math.round(k*10)/10).toString().replace(/\.0$/,'')+'K'; }
+      return Math.round(v).toString();
+    }
+    function fmt(el,v){ return (el.dataset.prefix||'') + (el.dataset.fmt==='compact'?fmtCompact(v):fmtPlain(v,+(el.dataset.dec||0))) + (el.dataset.suffix||''); }
+    function finalText(el){ return fmt(el,+el.dataset.to); }
+    function setFinalAll(){ film.querySelectorAll('[data-to]').forEach(function(el){ el.textContent=finalText(el); }); }
+    function clearCounts(){ counts.forEach(clearTimeout); counts=[]; }
+    function countEl(el){
+      var to=+el.dataset.to, from=+(el.dataset.from||0), dur=+(el.dataset.dur||1500), start=performance.now();
+      el.textContent=fmt(el,from);
+      (function step(){
+        var t=Math.min(1,(performance.now()-start)/dur), e=1-Math.pow(1-t,3);
+        el.textContent=fmt(el, from+(to-from)*e);
+        if(t<1) counts.push(setTimeout(step,16));
+      })();
+    }
+    function arm(){ clearTimeout(timer); if(playing){ startedAt=performance.now(); timer=setTimeout(function(){ activate((idx+1)%N); }, remaining); } }
+    function activate(i){
+      clearCounts(); setFinalAll();
+      idx=i; remaining=DURATION;
+      sceneEls.forEach(function(s,k){ var on=k===i; s.classList.toggle('is-active',on); s.setAttribute('aria-hidden',on?'false':'true'); });
+      dotEls.forEach(function(d,k){ var on=k===i; d.classList.toggle('active',on); d.setAttribute('aria-selected',on?'true':'false'); });
+      sceneEls[i].querySelectorAll('[data-to]').forEach(countEl);
+      arm();
+    }
+    function pause(){ if(!playing) return; playing=false; clearTimeout(timer); remaining-=performance.now()-startedAt; if(remaining<0) remaining=0; film.classList.remove('is-playing'); film.classList.add('is-paused'); pp.setAttribute('aria-label', isAR?'تشغيل':'Play'); }
+    function play(){ if(playing) return; playing=true; film.classList.add('is-playing'); film.classList.remove('is-paused'); pp.setAttribute('aria-label', isAR?'إيقاف مؤقت':'Pause'); arm(); }
+    function goTo(i){ if(!playing){ playing=true; film.classList.add('is-playing'); film.classList.remove('is-paused'); pp.setAttribute('aria-label',isAR?'إيقاف مؤقت':'Pause'); } activate(i); }
+    if(isAR) pp.setAttribute('aria-label','إيقاف مؤقت');
+
+    pp.addEventListener('click', function(){ playing?pause():play(); });
+    dotEls.forEach(function(d){ d.addEventListener('click', function(){ goTo(+d.dataset.go); }); });
+    document.addEventListener('visibilitychange', function(){ if(document.hidden){ if(playing){ wasPlaying=true; pause(); } } else if(wasPlaying){ wasPlaying=false; play(); } });
+
+    film.classList.add('is-playing'); activate(0);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="color-scheme" content="dark">
+<meta name="darkreader-lock">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#06060c;color:#f3f4ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+[dir="rtl"]{font-family:"IBM Plex Sans Arabic","SF Arabic","Segoe UI",Tahoma,sans-serif}
+::selection{background:rgba(255,55,95,.3)}
+@keyframes dvTwinkle{0%,100%{opacity:.25}50%{opacity:.8}}
+@keyframes dvDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+@keyframes dvSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes dvBreath{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.12);opacity:.85}}
+@keyframes dvCue{0%{transform:translateY(0);opacity:.7}50%{transform:translateY(9px);opacity:.25}100%{transform:translateY(0);opacity:.7}}
+@keyframes dvFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" dir="ltr" style="position:relative;width:100%;background:#06060c">
+
+  <!-- ============ FIXED AMBIENT BACKGROUND ============ -->
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(1200px 800px at 75% -5%, rgba(41,151,255,.10), transparent 60%),radial-gradient(1000px 760px at 8% 30%, rgba(255,55,95,.08), transparent 60%),radial-gradient(1100px 820px at 90% 95%, rgba(191,90,242,.08), transparent 62%),#06060c"></div>
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;background-image:radial-gradient(1.4px 1.4px at 12% 22%, #fff, transparent),radial-gradient(1.2px 1.2px at 28% 64%, #cfd3ff, transparent),radial-gradient(1.5px 1.5px at 47% 38%, #fff, transparent),radial-gradient(1.1px 1.1px at 63% 78%, #bcdcff, transparent),radial-gradient(1.3px 1.3px at 78% 16%, #fff, transparent),radial-gradient(1.2px 1.2px at 88% 56%, #ffd6e0, transparent),radial-gradient(1.1px 1.1px at 36% 88%, #fff, transparent),radial-gradient(1.3px 1.3px at 6% 80%, #cfe0ff, transparent);background-repeat:no-repeat;animation:dvTwinkle 7s ease-in-out infinite"></div>
+
+  <!-- ============ NAV RAIL ============ -->
+  <nav aria-label="Chapters" style="position:fixed;top:50%;right:26px;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:13px;mix-blend-mode:normal">
+    <a data-rail="hero" href="#ch-hero" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#f3f4ff;opacity:1;transition:opacity .3s,color .3s">Intro<i style="--ra:#aeb4ff;width:8px;height:8px;border-radius:50%;background:#fff;transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="meta-ads" href="#ch-meta-ads" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">01 Paid social<i style="--ra:#2997ff;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="almaali" href="#ch-almaali" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">02 Audience<i style="--ra:#ff453a;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="crm" href="#ch-crm" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">03 CRM<i style="--ra:#30d158;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="brand" href="#ch-brand" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">04 Brand<i style="--ra:#bf5af2;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="sheep" href="#ch-sheep" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">05 Software<i style="--ra:#64d2ff;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="hr" href="#ch-hr" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">06 Hiring<i style="--ra:#ffd60a;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="web" href="#ch-web" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">07 Web<i style="--ra:#7574ee;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="ai" href="#ch-ai" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">08 AI model<i style="--ra:#ff9f0a;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="resume" href="#ch-resume" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">09 Career OS<i style="--ra:#bf5af2;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+    <a data-rail="contact" href="#ch-contact" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#6f74a0;opacity:.4;transition:opacity .3s,color .3s">Contact<i style="--ra:#fff;width:8px;height:8px;border-radius:50%;background:#3a3a52;transform:scale(.55);transition:transform .3s,background .3s;flex:none"></i></a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header data-chapter="hero" id="ch-hero" style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 8vw">
+    <div aria-hidden="true" style="position:absolute;left:60%;top:18%;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side, rgba(41,151,255,.22), transparent);filter:blur(20px);animation:dvDrift 14s ease-in-out infinite"></div>
+    <div style="max-width:1080px;position:relative">
+      <p data-enter data-ar="محمد محمود · مدماك · الكويت" style="opacity:1;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:0 0 26px;font:500 12.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.34em;color:#6f74a0;text-transform:uppercase">Mohamed Mahmoud · Medmac · Kuwait</p>
+      <h1 data-enter data-ar="فريق تسويقٍ كامل. في شخصٍ واحد." style="opacity:1;transform:translateY(28px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .08s,transform 1s cubic-bezier(.16,1,.3,1) .08s;margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(44px,7.6vw,116px);line-height:.96;letter-spacing:-.035em">A whole marketing<br>team. <span style="background:linear-gradient(100deg,#2997ff,#bf5af2 46%,#ff453a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">In one person.</span></h1>
+      <p data-enter data-ar="أُدير الإعلانات المدفوعة، وأُنمّي الجماهير، وأبني نظام العملاء، وأُطلق البرمجيات، وأُؤتمت الباقي بالذكاء الاصطناعي — لشركةٍ صناعية واحدة في الكويت. تسعة أنظمة. كل رقمٍ حقيقي." style="opacity:1;transform:translateY(28px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .16s,transform 1s cubic-bezier(.16,1,.3,1) .16s;margin:34px 0 0;max-width:60ch;font-size:clamp(16px,1.5vw,20px);line-height:1.62;color:#aab0d6">I run the paid ads, grow the audiences, build the CRM, ship the software, and automate the rest with AI — for one industrial company in Kuwait. <span style="color:#f3f4ff">Nine systems. Every number real.</span></p>
+    </div>
+    <a href="#ch-meta-ads" data-enter data-ar="مرّر" style="opacity:1;transform:translateY(28px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .3s,transform 1s cubic-bezier(.16,1,.3,1) .3s;position:absolute;left:8vw;bottom:38px;display:inline-flex;align-items:center;gap:11px;text-decoration:none;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.24em;color:#6f74a0;text-transform:uppercase">Scroll<span style="display:inline-block;width:1px;height:30px;background:linear-gradient(#6f74a0,transparent);animation:dvCue 1.8s ease-in-out infinite"></span></a>
+  </header>
+
+  <!-- ============ THESIS ============ -->
+  <section data-chapter="hero" style="position:relative;z-index:1;min-height:88vh;display:flex;align-items:center;padding:0 8vw">
+    <div style="max-width:1080px">
+      <p data-enter style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1);margin:0 0 22px;font:500 12px/1 ui-monospace,Menlo,monospace;letter-spacing:.3em;color:#6f74a0;text-transform:uppercase">The thesis</p>
+      <h2 data-enter data-ar="ليس مُختصًّا. بل نظام تشغيلٍ من شخصٍ واحد." style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .08s;margin:0;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(30px,4.4vw,62px);line-height:1.04;letter-spacing:-.03em;max-width:18ch">Not a specialist. A one-person operating system.</h2>
+      <p data-enter data-ar="معظم الشركات توظّف فريقًا لهذا. هذه الشركة وظّفت شخصًا واحدًا — وما يلي تسعة أنظمةٍ حقيقية بنيتها وأُشغّلها. مرّر خلالها." style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .16s;margin:30px 0 44px;max-width:56ch;font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#aab0d6">Most companies hire a team for this. This one hired a single person — and what follows is nine real systems I built and run. Scroll through them.</p>
+      <div data-enter style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .24s;display:flex;flex-wrap:wrap;gap:10px;max-width:880px">
+        <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1 inherit;color:#aab0d6;border:1px solid rgba(41,151,255,.3);background:rgba(41,151,255,.07);border-radius:100px;padding:9px 15px"><i style="width:7px;height:7px;border-radius:50%;background:#2997ff"></i>Paid social</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1 inherit;color:#aab0d6;border:1px solid rgba(255,69,58,.3);background:rgba(255,69,58,.07);border-radius:100px;padding:9px 15px"><i style="width:7px;height:7px;border-radius:50%;background:#ff453a"></i>Audience growth</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1 inherit;color:#aab0d6;border:1px solid rgba(48,209,88,.3);background:rgba(48,209,88,.07);border-radius:100px;padding:9px 15px"><i style="width:7px;height:7px;border-radius:50%;background:#30d158"></i>Marketing ops</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1 inherit;color:#aab0d6;border:1px solid rgba(191,90,242,.3);background:rgba(191,90,242,.07);border-radius:100px;padding:9px 15px"><i style="width:7px;height:7px;border-radius:50%;background:#bf5af2"></i>Brand &amp; content</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1 inherit;color:#aab0d6;border:1px solid rgba(100,210,255,.3);background:rgba(100,210,255,.07);border-radius:100px;padding:9px 15px"><i style="width:7px;height:7px;border-radius:50%;background:#64d2ff"></i>Software</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1 inherit;color:#aab0d6;border:1px solid rgba(255,214,10,.3);background:rgba(255,214,10,.07);border-radius:100px;padding:9px 15px"><i style="width:7px;height:7px;border-radius:50%;background:#ffd60a"></i>Automation</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1 inherit;color:#aab0d6;border:1px solid rgba(117,116,238,.3);background:rgba(117,116,238,.07);border-radius:100px;padding:9px 15px"><i style="width:7px;height:7px;border-radius:50%;background:#7574ee"></i>Web</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1 inherit;color:#aab0d6;border:1px solid rgba(255,159,10,.3);background:rgba(255,159,10,.07);border-radius:100px;padding:9px 15px"><i style="width:7px;height:7px;border-radius:50%;background:#ff9f0a"></i>AI operating model</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01 · META ADS ============ -->
+  <section data-chapter="meta-ads" id="ch-meta-ads" style="--a:#2997ff;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:340vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;right:6%;top:50%;width:640px;height:480px;transform:translateY(-50%);background:radial-gradient(closest-side, rgba(41,151,255,.16), transparent 70%);filter:blur(10px);pointer-events:none"></div>
+        <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:0 8vw;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+          <div>
+            <p style="margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>01 · Paid social</p>
+            <h2 data-ar="عملاء بأقلّ من دولار." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.8vw,72px);line-height:1.0;letter-spacing:-.03em">Leads under<br><span style="background:linear-gradient(95deg,#2997ff,#5ac8fa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">a dollar.</span></h2>
+            <p data-ar="تجربة ميتا مُقاسة لمورّد صناعي: حوّلت ١٧٢٫٧٨$ من الإنفاق إلى ٢٠٦ محادثة واتساب — بنحو ٠٫٨٤$ للواحدة." style="margin:26px 0 0;max-width:46ch;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#aab0d6">A measured Meta pilot for a B2B industrial supplier: I turned <span style="color:#f3f4ff">$172.78 of spend into 206 WhatsApp conversations</span> — at about $0.84 each.</p>
+            <div style="margin:34px 0 0;display:grid;grid-template-columns:repeat(3,auto);gap:18px 34px;justify-content:start;opacity:calc(min(1, max(0, (var(--p,0) - 0.5) * 6)))">
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:23px;color:#f3f4ff;font-variant-numeric:tabular-nums">$2.03</div><div style="font:500 10.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:5px;letter-spacing:.06em">CPM</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:23px;color:#f3f4ff;font-variant-numeric:tabular-nums">$0.31</div><div style="font:500 10.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:5px;letter-spacing:.06em">CPC</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:23px;color:#f3f4ff;font-variant-numeric:tabular-nums">0.65%</div><div style="font:500 10.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:5px;letter-spacing:.06em">CTR</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:23px;color:#f3f4ff;font-variant-numeric:tabular-nums">85,132</div><div style="font:500 10.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:5px;letter-spacing:.06em">Impressions</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:23px;color:#f3f4ff;font-variant-numeric:tabular-nums">40,460</div><div style="font:500 10.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:5px;letter-spacing:.06em">Reach</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:23px;color:#f3f4ff;font-variant-numeric:tabular-nums">2.1</div><div style="font:500 10.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:5px;letter-spacing:.06em">Frequency</div></div>
+            </div>
+            <p data-ar="الأرقام أعلاه هي تجربة ٢٠٢٦ المُقاسة (١ مايو–٣ يونيو) من نظام العملاء الحيّ. أنا أُولّد العملاء — ومهندس الشركة يُسعّر ويُغلق — لذا أُبلّغ عن العملاء لا عن الإيرادات المُغلقة." style="margin:24px 0 0;max-width:52ch;font-size:12.5px;line-height:1.55;color:#6f74a0;border-inline-start:2px solid rgba(41,151,255,.4);padding-inline-start:12px;opacity:calc(min(1, max(0, (var(--p,0) - 0.78) * 9)))">Measured 2026 pilot (1 May – 3 Jun) from the live CRM. I generate the leads — the company's engineer prices and closes — so I report leads, not closed revenue.</p>
+            <!-- real ad creatives (public Medmac Kuwait Co. campaign art) -->
+            <div style="margin:22px 0 0;opacity:calc(min(1, max(0, (var(--p,0) - 0.68) * 8)))">
+              <div style="font:600 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;color:#6f74a0;text-transform:uppercase;margin-bottom:10px">The actual ads I ran</div>
+              <div style="display:flex;gap:9px">
+                <img src="public/media/meta/creative-scaffolding.png" alt="Medmac scaffolding ad" style="width:74px;height:74px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.12)">
+                <img src="public/media/meta/creative-ad5.jpg" alt="Medmac equipment ad" style="width:74px;height:74px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.12)">
+                <img src="public/media/meta/creative-heavy.png" alt="Medmac heavy-equipment ad" style="width:74px;height:74px;object-fit:cover;object-position:center top;border-radius:10px;border:1px solid rgba(255,255,255,.12)">
+              </div>
+            </div>
+          </div>
+          <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:22px">
+            <div style="text-align:center">
+              <div style="font:500 11.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;letter-spacing:.14em;margin-bottom:12px">COST PER WHATSAPP LEAD</div>
+              <div data-count data-from="6.25" data-to="0.84" data-dec="2" data-prefix="$" data-at="0.12" data-end="0.62" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(72px,11vw,150px);line-height:.82;letter-spacing:-.04em;background:linear-gradient(95deg,#2997ff,#5ac8fa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-variant-numeric:tabular-nums">$6.25</div>
+              <div style="font:500 13px/1.45 inherit;color:#aab0d6;margin-top:14px">from a $6.25 ad I caught and cut —<br>down to <span style="color:#f3f4ff">$0.84 average</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:22px;margin-top:6px">
+              <div style="text-align:center"><div data-count data-from="0" data-to="172.78" data-dec="2" data-prefix="$" data-at="0.1" data-end="0.6" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#f3f4ff;font-variant-numeric:tabular-nums">$0</div><div style="font:500 10.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.06em">SPEND</div></div>
+              <div style="font-size:22px;color:var(--a)">→</div>
+              <div style="text-align:center"><div data-count data-from="0" data-to="206" data-at="0.1" data-end="0.62" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 10.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.06em">CONVERSATIONS</div></div>
+            </div>
+            <div style="width:100%;max-width:380px;margin-top:6px;display:flex;flex-direction:column;gap:12px;opacity:calc(min(1, max(0, (var(--p,0) - 0.58) * 6)))">
+              <div>
+                <div style="display:flex;justify-content:space-between;font:500 12px/1 inherit;color:#aab0d6;margin-bottom:7px"><span>Misting Fan · best</span><span style="color:#f3f4ff">$0.50 · 106</span></div>
+                <div style="height:7px;border-radius:5px;background:rgba(255,255,255,.06);overflow:hidden"><i style="display:block;height:100%;width:calc(min(100%, max(0%, (var(--p,0) - 0.58) * 200%)));background:linear-gradient(90deg,#2997ff,#5ac8fa)"></i></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font:500 12px/1 inherit;color:#aab0d6;margin-bottom:7px"><span>Scaffolding</span><span style="color:#f3f4ff">$1.14 · 72</span></div>
+                <div style="height:7px;border-radius:5px;background:rgba(255,255,255,.06);overflow:hidden"><i style="display:block;height:100%;width:calc(min(68%, max(0%, (var(--p,0) - 0.62) * 140%)));background:linear-gradient(90deg,#2997ff,#5ac8fa)"></i></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font:500 12px/1 inherit;color:#aab0d6;margin-bottom:7px"><span>Misting Systems</span><span style="color:#f3f4ff">$1.35 · 28</span></div>
+                <div style="height:7px;border-radius:5px;background:rgba(255,255,255,.06);overflow:hidden"><i style="display:block;height:100%;width:calc(min(28%, max(0%, (var(--p,0) - 0.66) * 90%)));background:linear-gradient(90deg,#2997ff,#5ac8fa)"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 · AL-MAALI (audience growth) ============ -->
+  <section data-chapter="almaali" id="ch-almaali" data-screen-label="02 Audience" style="--a:#ff453a;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:360vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;left:8%;top:50%;width:680px;height:520px;transform:translateY(-50%);background:radial-gradient(closest-side, rgba(255,69,58,.16), transparent 70%);filter:blur(10px);pointer-events:none"></div>
+        <div aria-hidden="true" style="position:absolute;right:3%;top:12%;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(80px,12vw,210px);line-height:.8;color:rgba(255,69,58,.06);letter-spacing:-.04em;transform:translateX(calc(var(--p, 0) * -60px));pointer-events:none;white-space:nowrap">AL-MA'A</div>
+        <div style="position:relative;width:100%;max-width:1300px;margin:0 auto;padding:0 8vw;display:grid;grid-template-columns:1fr 1.12fr;gap:48px;align-items:center">
+          <!-- left: copy + climb counter -->
+          <div>
+            <p style="margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>02 · Audience growth</p>
+            <h2 data-ar="من الصفر إلى أكثر من مليون." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,68px);line-height:1.0;letter-spacing:-.03em">0 → 1M+<br><span style="color:#aab0d6;font-weight:500;font-size:.42em;letter-spacing:0">on a satellite channel's Facebook</span></h2>
+            <div style="margin:28px 0 0;display:flex;align-items:flex-end;gap:18px">
+              <div data-count data-from="9200" data-to="1000000" data-fmt="km" data-at="0.06" data-end="0.66" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(56px,8.4vw,120px);line-height:.84;letter-spacing:-.04em;background:linear-gradient(95deg,#ff375f,#ff7eb6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-variant-numeric:tabular-nums">9.2K</div>
+              <div style="padding-bottom:12px;font:500 14px/1.4 inherit;color:#aab0d6">Facebook<br>followers</div>
+            </div>
+            <p data-ar="نمّيت فيسبوك قناة فضائية إسلامية من ٩٫٢ ألف إلى أكثر من مليون متابع — وبنيت ثلاث منصات أخرى من الصفر تقريبًا." style="margin:24px 0 0;max-width:46ch;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#aab0d6">I grew an Islamic satellite channel's Facebook from <span style="color:#f3f4ff">9.2K to over a million</span> followers — and built three more platforms from near zero.</p>
+            <!-- verified endpoints -->
+            <div style="margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px">
+              <span style="display:inline-flex;align-items:center;gap:7px;font:600 12px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,55,95,.3);background:rgba(255,55,95,.08);border-radius:100px;padding:7px 12px"><i style="width:7px;height:7px;border-radius:2px;background:#ff375f"></i>Facebook 9.2K→1M+</span>
+              <span style="display:inline-flex;align-items:center;gap:7px;font:600 12px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);border-radius:100px;padding:7px 12px"><i style="width:7px;height:7px;border-radius:2px;background:#ff7eb6"></i>Instagram 3K→50K</span>
+              <span style="display:inline-flex;align-items:center;gap:7px;font:600 12px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);border-radius:100px;padding:7px 12px"><i style="width:7px;height:7px;border-radius:2px;background:#ff9aa9"></i>YouTube 0→43K</span>
+              <span style="display:inline-flex;align-items:center;gap:7px;font:600 12px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);border-radius:100px;padding:7px 12px"><i style="width:7px;height:7px;border-radius:2px;background:#ffc2cb"></i>TikTok 0→33K</span>
+            </div>
+            <!-- peak single-post reach (real, from the post insights on the right) -->
+            <div style="margin:24px 0 0;opacity:calc(min(1, max(0, (var(--p,0) - 0.5) * 7)))">
+              <div style="font:600 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;color:#6f74a0;text-transform:uppercase;margin-bottom:9px">Peak reach on a single post</div>
+              <div style="display:flex;align-items:baseline;gap:14px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-variant-numeric:tabular-nums;color:#f3f4ff">
+                <span style="font-size:clamp(22px,2.6vw,32px)">14.2M</span><span style="color:#3a3a52">·</span><span style="font-size:clamp(22px,2.6vw,32px)">6.2M</span><span style="color:#3a3a52">·</span><span style="font-size:clamp(22px,2.6vw,32px)">1.8M</span>
+              </div>
+            </div>
+            <p data-ar="هذه أعداد متابعين على قنواتٍ عامة، مُبلَّغ عنها ذاتيًا من القنوات التي أدرتها (٢٠٢١–٢٠٢٥؛ انتهى المشروع في ٢٠٢٥). أرقام الوصول والإعجاب المعروضة هنا حقيقية من تلك المنشورات. مليون متابع على فيسبوك قابلٌ للتحقّق علنًا — ومعظم المسوّقين لا يبلغونه." style="margin:22px 0 0;max-width:54ch;font-size:12.5px;line-height:1.55;color:#6f74a0;border-inline-start:2px solid rgba(255,69,58,.4);padding-inline-start:12px;opacity:calc(min(1, max(0, (var(--p, 0) - 0.72) * 9)))">Public-channel follower counts, self-reported from the channels I ran (2021–2025; concluded 2025). The post-level reach and likes on the right are the real numbers from those posts. A million on Facebook is publicly verifiable — most marketers never reach it.</p>
+          </div>
+          <!-- right: real proof wall -->
+          <div style="position:relative">
+            <p style="margin:0 0 13px;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.2em;color:#6f74a0;text-transform:uppercase">Real posts · public metrics ↓</p>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <!-- column A -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+                <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 22px 50px -26px rgba(255,55,95,.6);opacity:calc(min(1, max(0, (var(--p,0) - 0.12) * 8)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.12) * 8))) * 16px))">
+                  <img src="public/media/almaali/reel-3.jpg" alt="Al-Ma'ali reel — 26,704 likes" style="display:block;width:100%;height:auto">
+                  <span style="position:absolute;top:9px;right:9px;font:700 9.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;color:#fff;background:rgba(255,55,95,.92);border-radius:5px;padding:5px 8px">TOP POST</span>
+                  <div style="position:absolute;left:9px;bottom:9px;display:inline-flex;align-items:center;gap:7px;font:700 12px/1 'Space Grotesk',sans-serif;color:#fff;background:rgba(6,6,12,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:7px 11px"><i style="width:6px;height:6px;border-radius:50%;background:#ff375f"></i>26.7K likes · 2,072 saves</div>
+                </div>
+                <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 22px 50px -26px rgba(255,55,95,.5);opacity:calc(min(1, max(0, (var(--p,0) - 0.26) * 8)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.26) * 8))) * 16px))">
+                  <img src="public/media/almaali/reel-1.jpg" alt="Al-Ma'ali reel — 7,490 likes" style="display:block;width:100%;height:auto">
+                  <div style="position:absolute;left:9px;bottom:9px;display:inline-flex;align-items:center;gap:7px;font:700 12px/1 'Space Grotesk',sans-serif;color:#fff;background:rgba(6,6,12,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:7px 11px"><i style="width:6px;height:6px;border-radius:50%;background:#ff375f"></i>7,490 likes</div>
+                </div>
+              </div>
+              <!-- column B -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+                <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 22px 50px -26px rgba(41,151,255,.5);opacity:calc(min(1, max(0, (var(--p,0) - 0.18) * 8)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.18) * 8))) * 16px))">
+                  <img src="public/media/almaali/reel-8.jpg" alt="Al-Ma'ali Facebook reel — 1.8M reach" style="display:block;width:100%;height:auto">
+                  <div style="position:absolute;left:9px;bottom:9px;display:inline-flex;align-items:center;gap:7px;font:700 12px/1 'Space Grotesk',sans-serif;color:#fff;background:rgba(6,6,12,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:7px 11px"><i style="width:6px;height:6px;border-radius:50%;background:#2997ff"></i>1.8M reach · Facebook</div>
+                </div>
+                <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 22px 50px -26px rgba(255,55,95,.45);opacity:calc(min(1, max(0, (var(--p,0) - 0.34) * 8)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.34) * 8))) * 16px))">
+                  <img src="public/media/almaali/reel-grid.jpg" alt="Al-Ma'ali reels — each 30–47K views" style="display:block;width:100%;height:auto">
+                  <div style="position:absolute;left:9px;bottom:9px;display:inline-flex;align-items:center;gap:7px;font:700 11.5px/1 'Space Grotesk',sans-serif;color:#fff;background:rgba(6,6,12,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:7px 11px"><i style="width:6px;height:6px;border-radius:50%;background:#ff375f"></i>each reel · 30–47K views</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · CRM ============ -->
+  <section data-chapter="crm" id="ch-crm" style="--a:#30d158;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:360vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;left:2%;top:50%;width:640px;height:500px;transform:translateY(-50%);background:radial-gradient(closest-side, rgba(48,209,88,.13), transparent 70%);filter:blur(10px);pointer-events:none"></div>
+        <div style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:0 8vw;display:grid;grid-template-columns:.9fr 1.1fr;gap:46px;align-items:center">
+          <div>
+            <p style="margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>03 · Marketing ops</p>
+            <h2 data-ar="من الإنفاق إلى عميلٍ مُتتبَّع." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.4vw,66px);line-height:1.02;letter-spacing:-.03em">From ad spend to a <span style="background:linear-gradient(95deg,#30d158,#64d2ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">tracked lead.</span></h2>
+            <p data-ar="لم يكن هناك نظام، فبنيت واحدًا: نظام عملاء ثنائي اللغة من ١٢ تبويبًا يربط كل دينار إنفاقٍ بعميلٍ مُسمّى وإجراءٍ تالٍ." style="margin:26px 0 0;max-width:46ch;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#aab0d6">No system existed, so I built one: a <span style="color:#f3f4ff">12-tab bilingual CRM</span> that connects every dinar of ad spend to a named lead and a next action.</p>
+            <div style="margin:32px 0 0;display:grid;grid-template-columns:repeat(2,auto);gap:18px 40px;justify-content:start">
+              <div><div data-count data-from="0" data-to="12" data-at="0.1" data-end="0.4" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">bilingual tabs</div></div>
+              <div><div data-count data-from="0" data-to="45" data-at="0.14" data-end="0.46" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">active named leads</div></div>
+              <div><div data-count data-from="0" data-to="22" data-at="0.18" data-end="0.5" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">offers sent</div></div>
+              <div><div data-count data-from="0" data-to="207" data-at="0.22" data-end="0.54" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">contacts captured</div></div>
+            </div>
+            <p data-ar="يُظهر النظام حاليًا ٠ صفقة مُغلقة — وهذا صحيح: أنا أُدير التسويق وتوليد العملاء؛ والمهندس يُسعّر ويُغلق. ومهمة النظام ألّا يضيع أيُّ عميلٍ في الطريق." style="margin:24px 0 0;max-width:52ch;font-size:12.5px;line-height:1.55;color:#6f74a0;border-inline-start:2px solid rgba(48,209,88,.4);padding-inline-start:12px;opacity:calc(min(1, max(0, (var(--p,0) - 0.74) * 9)))">It shows 0 closed sales — and that's correct: I run marketing and lead-gen; the engineer prices and closes. The system's job is to make sure no lead is lost on the way there.</p>
+          </div>
+          <!-- CRM real system window: real tabs from CRM latest.xlsx, PII redacted before render -->
+          <div style="position:relative;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));backdrop-filter:blur(20px);box-shadow:0 40px 90px -40px rgba(48,209,88,.45);overflow:hidden">
+            <div style="display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+              <i style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></i><i style="width:11px;height:11px;border-radius:50%;background:#febc2e"></i><i style="width:11px;height:11px;border-radius:50%;background:#28c840"></i>
+              <span style="margin-inline-start:12px;font:500 12px/1 ui-monospace,Menlo,monospace;color:#aab0d6">CRM latest.xlsx · 12 tabs · AR / EN</span>
+            </div>
+            <!-- real tab names (file order) -->
+            <div style="display:flex;gap:5px;padding:11px 14px 9px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,#000 84%,transparent);mask-image:linear-gradient(90deg,#000 84%,transparent);white-space:nowrap;font-family:'IBM Plex Sans Arabic',sans-serif">
+              <span style="flex:none;font:600 11px/1 inherit;color:#06120a;background:#30d158;border-radius:7px;padding:6px 10px">لوحة التحكم</span>
+              <span style="flex:none;font:500 11px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:6px 10px">مهام اليوم</span>
+              <span style="flex:none;font:500 11px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:6px 10px">العملاء</span>
+              <span style="flex:none;font:500 11px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:6px 10px">سجل المبيعات</span>
+              <span style="flex:none;font:500 11px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:6px 10px">قائمة الأسعار</span>
+              <span style="flex:none;font:500 11px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:6px 10px">🔗 ربط الإعلان بالعملاء</span>
+              <span style="flex:none;font:500 11px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:6px 10px">⚖️ المسؤولية والتأخير</span>
+            </div>
+            <!-- cross-fading real screenshots (flip through the tabs as you scroll) -->
+            <div style="position:relative;height:min(52vh,468px);background:#0b0e14;border-top:1px solid rgba(255,255,255,.05)">
+              <img src="public/media/crm/dashboard.png" alt="CRM dashboard — 207 contacts, 22 offers, 0 sold" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:14px;opacity:calc(min(1, max(0, (0.40 - var(--p,0)) * 10)))">
+              <img src="public/media/crm/ads-to-leads.png" alt="Ad spend → leads link — $172.78 → 206 conversations" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:18px;opacity:calc(max(0, min((var(--p,0) - 0.34) * 14, (0.70 - var(--p,0)) * 14, 1)))">
+              <img src="public/media/crm/leads.png" alt="Leads pipeline — colour-coded, PII redacted" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12px;opacity:calc(min(1, max(0, (var(--p,0) - 0.63) * 14)))">
+            </div>
+            <!-- synced caption -->
+            <div style="position:relative;height:18px;margin:12px 18px 2px">
+              <span style="position:absolute;inset:0;font:600 12px/1.5 inherit;color:#aab0d6;opacity:calc(min(1, max(0, (0.40 - var(--p,0)) * 10)))"><b style="color:#f3f4ff">Dashboard</b> — 207 contacts · 22 offers · <span style="color:#ff7e9a">0 sold</span></span>
+              <span style="position:absolute;inset:0;font:600 12px/1.5 inherit;color:#aab0d6;opacity:calc(max(0, min((var(--p,0) - 0.34) * 14, (0.70 - var(--p,0)) * 14, 1)))"><b style="color:#f3f4ff">Ad → lead link</b> — $172.78 spend → 206 conversations</span>
+              <span style="position:absolute;inset:0;font:600 12px/1.5 inherit;color:#aab0d6;opacity:calc(min(1, max(0, (var(--p,0) - 0.63) * 14)))"><b style="color:#f3f4ff">Leads pipeline</b> — colour-coded; every contact PII-redacted</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 18px 15px;border-top:1px solid rgba(255,255,255,.07);margin-top:12px;font:600 12px/1 inherit;color:#aab0d6;flex-wrap:wrap">
+              <span style="color:#f3f4ff">$172.78</span><span style="color:#6f74a0">→</span><span style="color:#f3f4ff">206 leads</span><span style="color:#6f74a0">→</span><span style="color:#f3f4ff">22 offers</span><span style="color:#6f74a0">→</span><span style="color:#ff7e9a">0 closed · by design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · BRAND SYSTEM ============ -->
+  <section data-chapter="brand" id="ch-brand" style="--a:#bf5af2;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:320vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;right:6%;top:50%;width:620px;height:480px;transform:translateY(-50%);background:radial-gradient(closest-side, rgba(191,90,242,.15), transparent 70%);filter:blur(10px);pointer-events:none"></div>
+        <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:0 8vw;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center">
+          <div>
+            <p style="margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>04 · Brand &amp; content</p>
+            <h2 data-ar="محرّك محتوى متكامل." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,70px);line-height:1.02;letter-spacing:-.03em">A whole<br><span style="background:linear-gradient(95deg,#bf5af2,#ff7eb6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">content engine.</span></h2>
+            <p data-ar="مجموعات قابلة لإعادة الاستخدام للإعلانات الاجتماعية وكتالوج واتساب وأوبن سوق — قواعد الهوية التي يُصنع منها كل شيء — مع ١٨ صفحة معاينة وكتالوج طباعة من ١٠ صفحات، وكل ذلك ثنائي اللغة." style="margin:26px 0 0;max-width:46ch;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#aab0d6">Reusable kits for <span style="color:#f3f4ff">social ads, the WhatsApp catalog, and OpenSooq</span> — the brand rules everything is made from — previewable as 18 pages, plus a 10-page print catalog. All bilingual.</p>
+            <div style="margin:32px 0 0;display:grid;grid-template-columns:repeat(3,auto);gap:18px 40px;justify-content:start">
+              <div><div data-count data-from="0" data-to="254" data-at="0.1" data-end="0.6" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">production files</div></div>
+              <div><div data-count data-from="0" data-to="144" data-at="0.16" data-end="0.66" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">videos</div></div>
+              <div><div data-count data-from="0" data-to="18" data-at="0.22" data-end="0.7" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">preview pages</div></div>
+            </div>
+          </div>
+          <!-- content matrix, masked reveal wave -->
+          <div style="position:relative">
+            <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:9px;-webkit-mask-image:linear-gradient(108deg, #000 calc(var(--p,0) * 160% - 25%), rgba(0,0,0,.12) calc(var(--p,0) * 160% + 12%));mask-image:linear-gradient(108deg, #000 calc(var(--p,0) * 160% - 25%), rgba(0,0,0,.12) calc(var(--p,0) * 160% + 12%))">
+              <i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(191,90,242,.5),rgba(191,90,242,.16));border:1px solid rgba(191,90,242,.3)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#bf5af2;font-size:13px">▶</i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(255,126,182,.4),rgba(255,126,182,.12));border:1px solid rgba(255,126,182,.25)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#bf5af2;font-size:13px">▶</i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(191,90,242,.4),rgba(191,90,242,.12));border:1px solid rgba(191,90,242,.25)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i>
+              <i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(255,126,182,.45),rgba(255,126,182,.14));border:1px solid rgba(255,126,182,.25)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#bf5af2;font-size:13px">▶</i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(191,90,242,.5),rgba(191,90,242,.16));border:1px solid rgba(191,90,242,.3)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(255,126,182,.4),rgba(255,126,182,.12));border:1px solid rgba(255,126,182,.22)"></i>
+              <i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(191,90,242,.4),rgba(191,90,242,.12));border:1px solid rgba(191,90,242,.25)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#bf5af2;font-size:13px">▶</i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(191,90,242,.45),rgba(191,90,242,.14));border:1px solid rgba(191,90,242,.28)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#bf5af2;font-size:13px">▶</i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(255,126,182,.4),rgba(255,126,182,.12));border:1px solid rgba(255,126,182,.22)"></i>
+              <i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(191,90,242,.5),rgba(191,90,242,.16));border:1px solid rgba(191,90,242,.3)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#bf5af2;font-size:13px">▶</i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(255,126,182,.45),rgba(255,126,182,.14));border:1px solid rgba(255,126,182,.25)"></i><i style="aspect-ratio:1;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"></i><i style="aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,rgba(191,90,242,.4),rgba(191,90,242,.12));border:1px solid rgba(191,90,242,.22)"></i>
+            </div>
+            <div style="margin-top:14px;font:500 12px/1 ui-monospace,Menlo,monospace;color:#6f74a0;letter-spacing:.04em">~254 files · ~144 videos · 10-page A4 catalog · bilingual</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 · SHEEP APP ============ -->
+  <section data-chapter="sheep" id="ch-sheep" data-screen-label="05 Software" style="--a:#64d2ff;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:350vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;left:4%;top:50%;width:620px;height:480px;transform:translateY(-50%);background:radial-gradient(closest-side, rgba(100,210,255,.14), transparent 70%);filter:blur(10px);pointer-events:none"></div>
+        <div style="position:relative;width:100%;max-width:1300px;margin:0 auto;padding:0 8vw;display:grid;grid-template-columns:1fr 1.06fr;gap:46px;align-items:center">
+          <div>
+            <p style="margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>05 · Software</p>
+            <h2 data-ar="برمجيات تُسلَّم فعلًا." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.4vw,66px);line-height:1.02;letter-spacing:-.03em">Software that<br><span style="background:linear-gradient(95deg,#64d2ff,#30d158);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">actually ships.</span></h2>
+            <p data-ar="تطبيق سطح مكتب يعمل دون إنترنت وثنائي اللغة لمزرعة أغنامٍ حقيقية — قاعدة من ١٥ جدولًا، ونموذج هويةٍ مانعٌ للتصادم، مُحزَّم لويندوز وماك ومُثبَت بـ٥٩/٥٩ اختبارًا آليًا." style="margin:26px 0 0;max-width:46ch;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#aab0d6">An offline, bilingual desktop app for a real sheep farm — a 15-table database, a <span style="color:#f3f4ff">collision-proof identity model</span>, packaged for Windows + macOS and proven by 59/59 automated tests.</p>
+            <p data-ar="مشكلة سلامة بيانات مُتنكّرة في هيئة تطبيق مزرعة: أرقام الأذن تُعاد بعد بيع الحيوان أو نفوقه — فوجب أن يضمن النظام استحالة اختلاط السجلات القديمة بالجديدة." style="margin:20px 0 0;max-width:48ch;font-size:14px;line-height:1.55;color:#8c92bd">The hard part: ear numbers get reused after an animal is sold or dies — so old and new records can never be allowed to blur together.</p>
+            <p data-ar="تطويرٌ مدفوعٌ بالمواصفات وبمساعدة الذكاء الاصطناعي (Claude Code). أنا المهندس وصاحب القرار والمراجع والمشغّل. ولم يُقَس الأثر التجاري، فلا أدّعي سوى حقائق التسليم." style="margin:22px 0 0;max-width:52ch;font-size:12.5px;line-height:1.55;color:#6f74a0;border-inline-start:2px solid rgba(100,210,255,.4);padding-inline-start:12px;opacity:calc(min(1, max(0, (var(--p,0) - 0.74) * 9)))">Spec-driven, AI-assisted (Claude Code). I'm the architect, decision-maker, reviewer and operator. Business impact was never measured, so I claim only the delivery facts.</p>
+          </div>
+          <!-- real app window: bilingual offline desktop, EN⇄AR crossfade on scroll -->
+          <div style="position:relative;display:flex;flex-direction:column;gap:15px">
+            <!-- hero: Arabic-first window -->
+            <div style="position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 90px -40px rgba(100,210,255,.45)">
+              <img src="public/media/sheep/app-ar.png" alt="برنامج إدارة قطيع الأغنام — Arabic UI" style="display:block;width:100%;height:auto">
+              <span style="position:absolute;top:11px;right:11px;font:700 12px/1 'IBM Plex Sans Arabic',sans-serif;color:#06222b;background:#64d2ff;border-radius:7px;padding:5px 9px">العربية</span>
+              <div style="position:absolute;left:11px;bottom:11px;display:inline-flex;align-items:center;gap:7px;font:700 11.5px/1 'Space Grotesk',sans-serif;color:#fff;background:rgba(6,10,18,.68);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:7px 11px"><i style="width:6px;height:6px;border-radius:50%;background:#30d158"></i>offline · Arabic-first</div>
+            </div>
+            <!-- english proof: the same app, EN UI -->
+            <div style="display:flex;gap:14px;align-items:center">
+              <div style="flex:none;width:210px;position:relative;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.12)">
+                <img src="public/media/sheep/app-en.png" alt="Sheep Flock Manager — English UI" style="display:block;width:100%;height:auto">
+                <span style="position:absolute;top:7px;right:7px;font:700 10px/1 ui-monospace,Menlo,monospace;color:#06222b;background:#64d2ff;border-radius:5px;padding:4px 7px">EN</span>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div style="font:700 15px/1.2 'Space Grotesk',sans-serif;color:#f3f4ff;margin-bottom:6px">Fully bilingual</div>
+                <div style="font:500 12px/1.5 inherit;color:#8c92bd">Every screen ships in Arabic and English — one offline desktop build.</div>
+              </div>
+            </div>
+            <!-- proof: real delivery facts -->
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span data-count data-from="0" data-to="59" data-at="0.1" data-end="0.46" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;line-height:1;color:#64d2ff;font-variant-numeric:tabular-nums">0</span>
+                <span style="font:600 14px/1.25 inherit;color:#aab0d6">/ 59 tests<br><span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#30d158">✓ 0 failures</span></span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;font:500 11.5px/1.5 ui-monospace,Menlo,monospace;color:#6f74a0">
+                <span><b style="color:#f3f4ff">15</b> SQLite tables · <b style="color:#f3f4ff">~2,405</b> LOC</span>
+                <span><b style="color:#f3f4ff">17</b> CI builds · collision-proof identity</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:7px;flex-wrap:wrap;opacity:calc(min(1, max(0, (var(--p,0) - 0.66) * 9)))">
+              <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px">Win 10/11 64-bit</span>
+              <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px">Win 7 32-bit</span>
+              <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px">macOS</span>
+              <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:6px 10px">GitHub Actions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 · HR SYSTEM ============ -->
+  <section data-chapter="hr" id="ch-hr" style="--a:#ffd60a;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:350vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;right:5%;top:50%;width:620px;height:480px;transform:translateY(-50%);background:radial-gradient(closest-side, rgba(255,214,10,.12), transparent 70%);filter:blur(10px);pointer-events:none"></div>
+        <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:0 8vw;display:grid;grid-template-columns:1fr 1.04fr;gap:48px;align-items:center">
+          <div>
+            <p style="margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>06 · Automation</p>
+            <h2 data-ar="توظيفٌ يعمل تلقائيًا." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,70px);line-height:1.02;letter-spacing:-.03em">Hiring on<br><span style="background:linear-gradient(95deg,#ffd60a,#ff9f0a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">autopilot.</span></h2>
+            <p data-ar="السِّيَر تصل عبر ثلاث قنواتٍ معًا. ٧ سكربتات بايثون و٣ مهام مجدولة تجمعها وتُزيل التكرار وتُقيّمها بالقراءة وتتتبّعها يوميًا — ولا تراسل مرشّحًا دون موافقة." style="margin:26px 0 0;max-width:46ch;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#aab0d6">Résumés arrive on three channels at once. <span style="color:#f3f4ff">7 Python scripts and 3 scheduled jobs</span> collect, dedupe, read-score and track them daily — and never message a candidate without approval.</p>
+            <div style="margin:30px 0 0;display:flex;gap:8px;flex-wrap:wrap;opacity:calc(min(1, max(0, (var(--p,0) - 0.6) * 7)))">
+              <span style="display:inline-flex;align-items:center;gap:7px;font:500 11.5px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:6px 11px"><i style="width:8px;height:8px;border-radius:2px;background:#30d158"></i>Confirmed</span>
+              <span style="display:inline-flex;align-items:center;gap:7px;font:500 11.5px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:6px 11px"><i style="width:8px;height:8px;border-radius:2px;background:#2997ff"></i>Interviewed</span>
+              <span style="display:inline-flex;align-items:center;gap:7px;font:500 11.5px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:6px 11px"><i style="width:8px;height:8px;border-radius:2px;background:#ffd60a"></i>Invited</span>
+              <span style="display:inline-flex;align-items:center;gap:7px;font:500 11.5px/1 inherit;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:6px 11px"><i style="width:8px;height:8px;border-radius:2px;background:#1ea64a"></i>Hired</span>
+            </div>
+            <p data-ar="مدفوعٌ بالمواصفات، وبمساعدة الذكاء الاصطناعي (Claude Code)، وأُشغّله يوميًا — وضعت الأدوار والمعايير والقواعد، وأوافق على كل دعوة. ولم يُقَس الوقت الموفّر، فلا يُدّعى." style="margin:22px 0 0;max-width:52ch;font-size:12.5px;line-height:1.55;color:#6f74a0;border-inline-start:2px solid rgba(255,214,10,.4);padding-inline-start:12px;opacity:calc(min(1, max(0, (var(--p,0) - 0.76) * 9)))">Spec-driven, AI-assisted (Claude Code), operated daily by me — I set the roles, rubric and rules, and approve every invitation. Time saved was never measured, so it isn't claimed.</p>
+          </div>
+          <!-- funnel -->
+          <div style="position:relative">
+            <div style="display:flex;gap:8px;justify-content:center;margin-bottom:18px;opacity:calc(min(1, max(0, var(--p,0) * 6)))">
+              <span style="font:500 11.5px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px">Gmail</span>
+              <span style="font:500 11.5px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px">WhatsApp</span>
+              <span style="font:500 11.5px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px">File drops</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+              <div style="width:100%;display:flex;align-items:center;justify-content:space-between;border-radius:12px;padding:18px 22px;background:linear-gradient(90deg, rgba(255,214,10,.16), rgba(255,214,10,.05));border:1px solid rgba(255,214,10,.25)"><span style="font:600 13px/1 inherit;color:#f3f4ff">Parsed from 3 channels</span><span data-count data-from="0" data-to="142" data-at="0.12" data-end="0.42" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;color:#ffd60a;font-variant-numeric:tabular-nums">0</span></div>
+              <div style="color:#6f74a0;font-size:16px">↓ dedupe</div>
+              <div style="width:78%;display:flex;align-items:center;justify-content:space-between;border-radius:12px;padding:16px 20px;background:linear-gradient(90deg, rgba(255,159,10,.16), rgba(255,159,10,.05));border:1px solid rgba(255,159,10,.25)"><span style="font:600 13px/1 inherit;color:#f3f4ff">Deduped</span><span data-count data-from="0" data-to="100" data-at="0.34" data-end="0.6" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#ff9f0a;font-variant-numeric:tabular-nums">0</span></div>
+              <div style="color:#6f74a0;font-size:16px">↓ read-scored</div>
+              <div style="width:50%;display:flex;align-items:center;justify-content:space-between;border-radius:12px;padding:15px 18px;background:linear-gradient(90deg, rgba(48,209,88,.18), rgba(48,209,88,.06));border:1px solid rgba(48,209,88,.3)"><span style="font:600 13px/1 inherit;color:#f3f4ff">Shortlisted</span><span data-count data-from="0" data-to="8" data-at="0.56" data-end="0.78" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;color:#30d158;font-variant-numeric:tabular-nums">0</span></div>
+            </div>
+            <div style="margin-top:20px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font:500 11.5px/1 ui-monospace,Menlo,monospace;color:#6f74a0;opacity:calc(min(1, max(0, (var(--p,0) - 0.66) * 8)))">
+              <span>08:30 intake</span><span>·</span><span>every 5h check</span><span>·</span><span>19:30 archive</span><span>·</span><span style="color:#aab0d6">7 scripts · 3 jobs</span>
+            </div>
+            <!-- real output: master candidate tracker, AI read-scored, names redacted -->
+            <div style="margin:20px 0 0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 22px 48px -26px rgba(255,214,10,.4);opacity:calc(min(1, max(0, (var(--p,0) - 0.74) * 9)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.74) * 9))) * 14px))">
+              <img src="public/media/hr/tracker-crop.png" alt="Master candidate tracker — AI read-scored, names redacted" style="display:block;width:100%;height:auto">
+            </div>
+            <div style="margin:9px 0 0;text-align:center;font:500 11px/1.4 ui-monospace,Menlo,monospace;color:#6f74a0;opacity:calc(min(1, max(0, (var(--p,0) - 0.78) * 9)))">Real output · master tracker · candidate names redacted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · MEDMAC WEBSITE ============ -->
+  <section data-chapter="web" id="ch-web" style="--a:#7574ee;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:340vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;left:6%;top:50%;width:620px;height:480px;transform:translateY(-50%);background:radial-gradient(closest-side, rgba(117,116,238,.16), transparent 70%);filter:blur(10px);pointer-events:none"></div>
+        <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:0 8vw;display:grid;grid-template-columns:1fr 1.08fr;gap:48px;align-items:center">
+          <div>
+            <p style="margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>07 · Web · Live</p>
+            <h2 data-ar="مباشر. ثنائي اللغة. شبه مثالي." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.4vw,66px);line-height:1.02;letter-spacing:-.03em">Live. Bilingual.<br><span style="background:linear-gradient(95deg,#7574ee,#2997ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Near-perfect.</span></h2>
+            <p data-ar="موقع شركةٍ حقيقية — عربي افتراضي RTL وإنجليزي — مُطلَق في الإنتاج على Vercel ويُسجّل ٩٦–١٠٠ في Lighthouse. افتحه على هاتفك." style="margin:26px 0 0;max-width:46ch;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#aab0d6">A real company's website — <span style="color:#f3f4ff">Arabic-default RTL and English</span> — shipped to production on Vercel and scoring 96–100 on Lighthouse. Open it on your phone.</p>
+            <a href="https://medmac-kuwait.vercel.app" target="_blank" rel="noopener" style="margin:26px 0 0;display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:600 13px/1 ui-monospace,Menlo,monospace;color:#f3f4ff;border:1px solid rgba(117,116,238,.4);background:rgba(117,116,238,.1);border-radius:100px;padding:10px 16px">medmac-kuwait.vercel.app ↗</a>
+            <p data-ar="مدفوعٌ بالمواصفات، وبمساعدة الذكاء الاصطناعي (Claude Code)، تحت سياسة لا اختلاق وضعتها وطبّقتها. الموقع مباشر؛ ودرجات Lighthouse من قياساتٍ حقيقية على نسخة الإنتاج." style="margin:22px 0 0;max-width:52ch;font-size:12.5px;line-height:1.55;color:#6f74a0;border-inline-start:2px solid rgba(117,116,238,.4);padding-inline-start:12px;opacity:calc(min(1, max(0, (var(--p,0) - 0.78) * 9)))">Spec-driven, AI-assisted (Claude Code) under a strict no-fabrication policy I set. The site is live; the Lighthouse scores are from real runs on the production build.</p>
+          </div>
+          <!-- browser + gauges -->
+          <div style="position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));backdrop-filter:blur(20px);box-shadow:0 40px 90px -40px rgba(117,116,238,.4);overflow:hidden">
+            <div style="display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.07)">
+              <i style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></i><i style="width:10px;height:10px;border-radius:50%;background:#febc2e"></i><i style="width:10px;height:10px;border-radius:50%;background:#28c840"></i>
+              <span style="margin-inline-start:10px;flex:1;font:500 11.5px/1 ui-monospace,Menlo,monospace;color:#aab0d6;background:rgba(0,0,0,.25);border-radius:7px;padding:7px 12px">🔒 medmac-kuwait.vercel.app</span>
+            </div>
+            <div style="padding:26px 24px 22px">
+              <div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;letter-spacing:.1em;margin-bottom:20px">LIGHTHOUSE · PRODUCTION BUILD</div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="position:relative;width:100%;max-width:104px;aspect-ratio:1">
+                    <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(#30d158 calc(min(96%, var(--p,0) * 138%)), rgba(255,255,255,.07) 0);-webkit-mask:radial-gradient(closest-side, transparent 70%, #000 71%);mask:radial-gradient(closest-side, transparent 70%, #000 71%)"></div>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span data-count data-from="0" data-to="96" data-at="0.12" data-end="0.66" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</span></div>
+                  </div>
+                  <div style="font:500 10.5px/1.2 inherit;color:#aab0d6;text-align:center">Performance</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="position:relative;width:100%;max-width:104px;aspect-ratio:1">
+                    <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(#30d158 calc(min(100%, var(--p,0) * 145%)), rgba(255,255,255,.07) 0);-webkit-mask:radial-gradient(closest-side, transparent 70%, #000 71%);mask:radial-gradient(closest-side, transparent 70%, #000 71%)"></div>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span data-count data-from="0" data-to="100" data-at="0.16" data-end="0.7" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</span></div>
+                  </div>
+                  <div style="font:500 10.5px/1.2 inherit;color:#aab0d6;text-align:center">Accessibility</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="position:relative;width:100%;max-width:104px;aspect-ratio:1">
+                    <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(#30d158 calc(min(100%, var(--p,0) * 150%)), rgba(255,255,255,.07) 0);-webkit-mask:radial-gradient(closest-side, transparent 70%, #000 71%);mask:radial-gradient(closest-side, transparent 70%, #000 71%)"></div>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span data-count data-from="0" data-to="100" data-at="0.2" data-end="0.74" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</span></div>
+                  </div>
+                  <div style="font:500 10.5px/1.2 inherit;color:#aab0d6;text-align:center">Best practices</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                  <div style="position:relative;width:100%;max-width:104px;aspect-ratio:1">
+                    <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(#30d158 calc(min(100%, var(--p,0) * 155%)), rgba(255,255,255,.07) 0);-webkit-mask:radial-gradient(closest-side, transparent 70%, #000 71%);mask:radial-gradient(closest-side, transparent 70%, #000 71%)"></div>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span data-count data-from="0" data-to="100" data-at="0.24" data-end="0.78" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</span></div>
+                  </div>
+                  <div style="font:500 10.5px/1.2 inherit;color:#aab0d6;text-align:center">SEO</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;opacity:calc(min(1, max(0, (var(--p,0) - 0.66) * 8)))">
+                <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px">10 templates +404</span>
+                <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px">~16 components</span>
+                <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px">~23 commits</span>
+                <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#aab0d6;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px">Astro · TS · Tailwind · Vercel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 · AI WORKFLOW ============ -->
+  <section data-chapter="ai" id="ch-ai" style="--a:#ff9f0a;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:340vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;right:5%;top:50%;width:620px;height:480px;transform:translateY(-50%);background:radial-gradient(closest-side, rgba(255,159,10,.14), transparent 70%);filter:blur(10px);pointer-events:none"></div>
+        <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:0 8vw;display:grid;grid-template-columns:1fr 1.06fr;gap:48px;align-items:center">
+          <div>
+            <p style="margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>08 · AI operating model</p>
+            <h2 data-ar="شخصٌ واحد. ثلاث أدوات ذكاء." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,70px);line-height:1.02;letter-spacing:-.03em">One person.<br><span style="background:linear-gradient(95deg,#ff9f0a,#ff7eb6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Three AI tools.</span></h2>
+            <p data-ar="شخصٌ واحد يُوجّه ثلاث أدوات ذكاء عبر نموذج تشغيلٍ صارم بلا اختلاق: Cowork يحفظ الذاكرة ويكتب المهام، وClaude Design يُنتج التصاميم، وClaude Code يُطلق الكود. مُوجَّهة إلى ٦ أشهر من البريد، فصلت المناقصات الحقيقية عن الضجيج واستعادت ٤ مناقصاتٍ حيّة سقطت من القائمة." style="margin:26px 0 0;max-width:48ch;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#aab0d6">One person directs three AI tools through a strict, no-fabrication model. Pointed at <span style="color:#f3f4ff">6 months of email</span>, it separated real RFQs from noise, ranked them by deadline, and drafted a reply for each.</p>
+            <div style="margin:30px 0 0;display:flex;gap:36px">
+              <div><div data-count data-from="0" data-to="23" data-at="0.5" data-end="0.74" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;color:#f3f4ff;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">RFQs consolidated</div></div>
+              <div><div data-count data-from="0" data-to="4" data-at="0.6" data-end="0.82" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;color:#ff9f0a;font-variant-numeric:tabular-nums">0</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:6px;letter-spacing:.05em">live tenders recovered</div></div>
+            </div>
+            <p data-ar="أدوات الذكاء تُنفّذ تحت إدارتي — صمّمت النموذج، وكتبت المهام، ووضعت قواعد لا اختلاق، واتخذت كل قرار. والمناقصات الأربع المُستعادة هي المكسب الملموس والموثّق." style="margin:22px 0 0;max-width:52ch;font-size:12.5px;line-height:1.55;color:#6f74a0;border-inline-start:2px solid rgba(255,159,10,.4);padding-inline-start:12px;opacity:calc(min(1, max(0, (var(--p,0) - 0.82) * 9)))">The AI tools execute under my direction — I designed the model, wrote the briefs, set the no-fabrication rules, and made every decision. The 4 recovered tenders are the concrete, sourced win.</p>
+          </div>
+          <!-- orchestration diagram -->
+          <div style="position:relative;display:flex;flex-direction:column;align-items:center">
+            <div style="display:inline-flex;align-items:center;gap:11px;border-radius:14px;border:1px solid rgba(255,159,10,.35);background:linear-gradient(180deg, rgba(255,159,10,.16), rgba(255,159,10,.04));padding:14px 22px">
+              <span style="font-size:20px">🧠</span><span style="font:700 15px/1 inherit;color:#f3f4ff">You — the operator</span>
+            </div>
+            <svg viewBox="0 0 400 70" style="width:100%;max-width:430px;height:auto;overflow:visible"><path data-draw data-at="0.08" data-end="0.5" d="M200,2 L200,28 M56,28 L344,28 M56,28 L56,58 M200,28 L200,58 M344,28 L344,58" fill="none" stroke="rgba(255,159,10,.5)" stroke-width="1.6" stroke-linecap="round"></path></svg>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:480px">
+              <div style="border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);padding:16px 13px;text-align:center;opacity:calc(min(1, max(0, (var(--p,0) - 0.26) * 8)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.26) * 8))) * 14px))"><div style="font:700 13.5px/1 inherit;color:#f3f4ff;margin-bottom:8px">Cowork</div><div style="font:500 11px/1.4 inherit;color:#8c92bd">controller · memory · briefs</div></div>
+              <div style="border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);padding:16px 13px;text-align:center;opacity:calc(min(1, max(0, (var(--p,0) - 0.34) * 8)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.34) * 8))) * 14px))"><div style="font:700 13.5px/1 inherit;color:#f3f4ff;margin-bottom:8px">Claude Design</div><div style="font:500 11px/1.4 inherit;color:#8c92bd">the look · direction in, design out</div></div>
+              <div style="border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);padding:16px 13px;text-align:center;opacity:calc(min(1, max(0, (var(--p,0) - 0.42) * 8)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.42) * 8))) * 14px))"><div style="font:700 13.5px/1 inherit;color:#f3f4ff;margin-bottom:8px">Claude Code</div><div style="font:500 11px/1.4 inherit;color:#8c92bd">build · git · deploy</div></div>
+            </div>
+            <div style="margin-top:22px;display:inline-flex;align-items:center;gap:12px;font:600 13px/1 inherit;color:#aab0d6;opacity:calc(min(1, max(0, (var(--p,0) - 0.5) * 7)))">
+              <span style="color:#f3f4ff">23 RFQs found</span><span style="color:#6f74a0">→</span><span style="color:#ff9f0a">4 live tenders the manual list had dropped</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 · MY RESUME / CAREER OS ============ -->
+  <section data-chapter="resume" id="ch-resume" style="--a:#bf5af2;position:relative;z-index:1">
+    <div data-scene style="position:relative;height:300vh">
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 8vw">
+        <div aria-hidden="true" style="position:absolute;left:50%;top:46%;width:680px;height:520px;transform:translate(-50%,-50%);background:radial-gradient(closest-side, rgba(191,90,242,.16), transparent 70%);filter:blur(14px);pointer-events:none"></div>
+        <p style="margin:0 0 20px;display:inline-flex;align-items:center;gap:10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.26em;color:var(--a);text-transform:uppercase"><i style="width:8px;height:8px;border-radius:50%;background:var(--a)"></i>09 · Career OS · this very site</p>
+        <h2 data-ar="بُني على المكشوف." style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(38px,6vw,92px);line-height:1.0;letter-spacing:-.035em;position:relative">Built in the <span style="background:linear-gradient(95deg,#bf5af2,#2997ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">open.</span></h2>
+        <p data-ar="نموذج التشغيل بالذكاء الاصطناعي خلف هذا الموقع — شخصٌ واحد وثلاث أدوات." style="margin:24px 0 0;max-width:46ch;font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#aab0d6;position:relative">The AI operating model behind this very site — one person, three tools.</p>
+        <div style="margin:46px 0 0;display:flex;align-items:center;gap:clamp(24px,5vw,64px);position:relative">
+          <div style="opacity:calc(min(1, max(0, (var(--p,0) - 0.2) * 7)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.2) * 7))) * 16px))"><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(56px,8vw,108px);line-height:1;color:#f3f4ff">3</div><div style="font:500 12px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:8px;letter-spacing:.05em">AI tools</div></div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:clamp(40px,6vw,80px);color:#3a3a52">·</div>
+          <div style="opacity:calc(min(1, max(0, (var(--p,0) - 0.32) * 7)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.32) * 7))) * 16px))"><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(56px,8vw,108px);line-height:1;color:#f3f4ff">1</div><div style="font:500 12px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:8px;letter-spacing:.05em">workflow</div></div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:300;font-size:clamp(40px,6vw,80px);color:#3a3a52">·</div>
+          <div style="opacity:calc(min(1, max(0, (var(--p,0) - 0.44) * 7)));transform:translateY(calc((1 - min(1, max(0, (var(--p,0) - 0.44) * 7))) * 16px))"><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(56px,8vw,108px);line-height:1;background:linear-gradient(95deg,#bf5af2,#2997ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">1</div><div style="font:500 12px/1 ui-monospace,Menlo,monospace;color:#6f74a0;margin-top:8px;letter-spacing:.05em">person</div></div>
+        </div>
+        <p data-ar="نفس النموذج الذي بنى هذا الموقع الذي تتصفّحه الآن." style="margin:40px 0 0;font:500 14px/1.5 inherit;color:#8c92bd;position:relative;opacity:calc(min(1, max(0, (var(--p,0) - 0.56) * 8)))">The same model built the site you're scrolling right now.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT FINALE ============ -->
+  <section data-chapter="contact" id="ch-contact" style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 8vw">
+    <div aria-hidden="true" style="position:absolute;left:50%;top:42%;width:900px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(closest-side, rgba(41,151,255,.1), transparent 70%),radial-gradient(closest-side, rgba(255,55,95,.08), transparent 75%);filter:blur(16px);pointer-events:none"></div>
+    <p data-enter style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1);margin:0 0 24px;font:600 12px/1 ui-monospace,Menlo,monospace;letter-spacing:.3em;color:#6f74a0;text-transform:uppercase">The offer</p>
+    <h2 data-enter data-ar="وظّف شخصًا. احصل على فريق." style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .08s;margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(44px,8vw,124px);line-height:.96;letter-spacing:-.035em">Hire one.<br><span style="background:linear-gradient(100deg,#2997ff,#bf5af2 50%,#ff453a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Get a team.</span></h2>
+    <p data-enter data-ar="تسعة أنظمة. شخصٌ واحد. كل رقمٍ حقيقي." style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .16s;margin:32px 0 0;font-size:clamp(16px,1.6vw,20px);line-height:1.6;color:#aab0d6">Nine systems. One person. Every number real.</p>
+    <div data-enter style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .24s;margin:42px 0 0;display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+      <span style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px">WhatsApp <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ add link</span></span>
+      <span style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px">Email <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ add link</span></span>
+      <span style="display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;color:#f3f4ff;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:100px;padding:13px 20px">LinkedIn <span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#6f74a0">↗ add link</span></span>
+    </div>
+    <p data-enter style="opacity:1;transform:translateY(24px);transition:.9s cubic-bezier(.16,1,.3,1) .32s;margin:54px 0 30px;font:500 12.5px/1.6 ui-monospace,Menlo,monospace;color:#6f74a0;letter-spacing:.04em">Mohamed Mahmoud — Medmac · Kuwait · 2026</p>
+  </section>
+
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;ar&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Language&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.scenes = []; this.raf = 0;
+    this.setRoot = (el) => { if (el) this.rootEl = el; };
+    this.onScroll = () => this.update();
+  }
+  componentDidMount(){
+    this.cache();
+    this.applyLang();
+    this.update();
+    if (this._loop) clearInterval(this._loop);
+    this._loop = setInterval(this.update.bind(this), 33);
+    var self2 = this; setTimeout(function(){ if (self2.enters) self2.enters.forEach(function(e){ e.style.opacity = '1'; e.style.transform = 'none'; e._shown = true; }); }, 1600);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
+    var self = this;
+    this.ioNav = new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if (e.isIntersecting) self.setActive(e.target.getAttribute('data-chapter')); });
+    }, { threshold: 0.01, rootMargin: '-45% 0px -45% 0px' });
+    this.qa('[data-chapter]').forEach(function(s){ self.ioNav.observe(s); });
+    this.ioEnter = new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if (e.isIntersecting){ e.target.style.opacity = '1'; e.target.style.transform = 'none'; self.ioEnter.unobserve(e.target); } });
+    }, { threshold: 0.18 });
+    this.qa('[data-enter]').forEach(function(x){ self.ioEnter.observe(x); });
+  }
+  componentWillUnmount(){
+    if (this._loop) clearInterval(this._loop);
+    window.removeEventListener('resize', this.onScroll);
+    if (this.ioNav) this.ioNav.disconnect();
+    if (this.ioEnter) this.ioEnter.disconnect();
+  }
+  componentDidUpdate(){ this.cache(); this.applyLang(); if (!this._loop) this._loop = setInterval(this.update.bind(this), 33); this.update(); }
+  q(s){ return (this.rootEl || document).querySelector(s); }
+  qa(s){ return Array.prototype.slice.call((this.rootEl || document).querySelectorAll(s)); }
+  cache(){
+    var self = this;
+    this.scenes = this.qa('[data-scene]').map(function(el){
+      var counts = Array.prototype.slice.call(el.querySelectorAll('[data-count]'));
+      var draws = Array.prototype.slice.call(el.querySelectorAll('[data-draw]'));
+      draws.forEach(function(d){ var len = 320; try { len = d.getTotalLength(); } catch(e){} d.style.strokeDasharray = len; d.style.strokeDashoffset = len; d._len = len; });
+      return { el: el, counts: counts, draws: draws };
+    });
+    this.enters = this.qa('[data-enter]');
+  }
+  prog(el){
+    var r = el.getBoundingClientRect(); var vh = window.innerHeight || 800;
+    var denom = r.height - vh; var p = denom > 0 ? (-r.top / denom) : (r.top < vh ? 1 : 0);
+    return p < 0 ? 0 : p > 1 ? 1 : p;
+  }
+  ease(x){ return 1 - Math.pow(1 - x, 3); }
+  sub(p, a, b){ var v = (p - a) / (b - a); return v < 0 ? 0 : v > 1 ? 1 : v; }
+  fmt(v, ds){
+    if (ds.fmt === 'km'){ if (v >= 1e6) return '1M+'; if (v >= 1e5) return Math.round(v/1000) + 'K'; if (v >= 1e3) return (v/1000).toFixed(1).replace(/\.0$/, '') + 'K'; return String(Math.round(v)); }
+    var dec = ds.dec ? parseInt(ds.dec, 10) : 0;
+    var n = dec ? v.toFixed(dec) : String(Math.round(v));
+    n = n.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return (ds.prefix || '') + n + (ds.suffix || '');
+  }
+  update(){
+    for (var i = 0; i < this.scenes.length; i++){
+      var sc = this.scenes[i]; var p = this.prog(sc.el); sc.el.style.setProperty('--p', p.toFixed(4));
+      for (var j = 0; j < sc.counts.length; j++){
+        var c = sc.counts[j], ds = c.dataset;
+        var a = ds.at ? parseFloat(ds.at) : 0, b = ds.end ? parseFloat(ds.end) : 1;
+        var lp = this.ease(this.sub(p, a, b));
+        var v = parseFloat(ds.from || '0') + (parseFloat(ds.to || '0') - parseFloat(ds.from || '0')) * lp;
+        var t = this.fmt(v, ds); if (c.textContent !== t) c.textContent = t;
+      }
+      for (var k = 0; k < sc.draws.length; k++){
+        var d = sc.draws[k], dd = d.dataset;
+        var a2 = dd.at ? parseFloat(dd.at) : 0, b2 = dd.end ? parseFloat(dd.end) : 1;
+        d.style.strokeDashoffset = (d._len * (1 - this.sub(p, a2, b2))).toFixed(1);
+      }
+    }
+    var chs = this.qa('[data-chapter]'), vc = (window.innerHeight || 800) / 2, act = null;
+    for (var m = 0; m < chs.length; m++){ var rr = chs[m].getBoundingClientRect(); if (rr.top <= vc && rr.bottom >= vc) act = chs[m].getAttribute('data-chapter'); }
+    if (act && act !== this._act){ this._act = act; this.setActive(act); }
+    if (this.enters){ var vh2 = window.innerHeight || 800; for (var z = 0; z < this.enters.length; z++){ var e = this.enters[z]; if (e._shown) continue; var er = e.getBoundingClientRect(); if (er.top < vh2 * 0.9 && er.bottom > 0){ e.style.opacity = '1'; e.style.transform = 'none'; e._shown = true; } } }
+  }
+  setActive(id){
+    this.qa('[data-rail]').forEach(function(r){
+      var on = r.getAttribute('data-rail') === id;
+      r.style.opacity = on ? '1' : '0.4'; r.style.color = on ? '#f3f4ff' : '#6f74a0';
+      var dot = r.querySelector('i');
+      if (dot){ dot.style.transform = on ? 'scale(1)' : 'scale(.55)'; dot.style.background = on ? (dot.style.getPropertyValue('--ra') || '#fff') : '#3a3a52'; }
+    });
+  }
+  applyLang(){
+    var ar = (this.props.lang === 'ar');
+    (this.rootEl || document.documentElement).setAttribute('dir', ar ? 'rtl' : 'ltr');
+    this.qa('[data-ar]').forEach(function(el){ if (el._en == null) el._en = el.innerHTML; el.innerHTML = ar ? el.getAttribute('data-ar') : el._en; });
+  }
+  tick(){ this.update(); this._loop = requestAnimationFrame(this.tick); }
+  renderVals(){ return { rootRef: this.setRoot }; }
+}
+</script>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="mmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2997ff"/><stop offset="0.5" stop-color="#bf5af2"/><stop offset="1" stop-color="#ff453a"/></linearGradient></defs>
+<rect width="512" height="512" rx="112" fill="#06060c"/>
+<rect x="112" y="112" width="288" height="288" rx="68" fill="url(#mmg)"/>
+<g fill="#ffffff">
+<circle cx="192" cy="192" r="19"/><circle cx="256" cy="192" r="19"/><circle cx="320" cy="192" r="19"/>
+<circle cx="192" cy="256" r="19"/><circle cx="256" cy="256" r="19"/><circle cx="320" cy="256" r="19"/>
+<circle cx="192" cy="320" r="19"/><circle cx="256" cy="320" r="19"/><circle cx="320" cy="320" r="19"/>
+</g>
+</svg>
+</template>
+</body>
+</html>
